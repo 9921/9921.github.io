@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,6 +29,34 @@
 }
 </style>
 <style>
+
+@media (max-width: 900px){
+  body{overflow:auto;height:auto;width:100%;-webkit-text-size-adjust:100%;}
+  .deck{height:auto;min-height:100vh}
+  .slide{position:relative;inset:auto;min-height:100vh;height:auto;padding-bottom:92px;transform:none}
+  .slide>.content{padding:clamp(1rem,4vw,2rem);max-width:100%}
+  .nav-controls{bottom:12px;left:50%;transform:translateX(-50%);padding:8px 14px;gap:10px}
+  .nav-btn{width:36px;height:36px;font-size:1.1rem}
+  .slide-counter{display:none}
+  .slide-dots{gap:6px;max-width:52vw;overflow:auto;padding-bottom:2px}
+  .dot{width:8px;height:8px;flex:0 0 auto}
+  .qgrid,.grid-3,.grid-4{grid-template-columns:1fr!important}
+  .mobile-stack{grid-template-columns:1fr!important}
+  .desktop-only{display:none!important}
+  .mobile-only{display:block!important}
+  h1{font-size:clamp(2.1rem,10vw,3.7rem)!important}
+  h2{font-size:clamp(1.6rem,7vw,2.4rem)!important}
+  p,li{font-size:1rem!important;line-height:1.6!important}
+}
+@media (min-width: 901px){
+  .mobile-only{display:none!important}
+}
+@media print{
+  body{overflow:visible;height:auto;width:100%}
+  .nav-controls,.mouse-spotlight{display:none!important}
+  .slide{position:relative;opacity:1!important;transform:none!important;pointer-events:auto!important;page-break-after:always;min-height:100vh}
+  .slide:last-child{page-break-after:auto}
+}
 :root{--color-bg:#0c1929;--color-text:#f2efe8;--glow-color-rgb:27,94,166;--color-glass-bg:rgba(255,255,255,.05);--color-glass-border:rgba(255,255,255,.10);--color-vignette:rgba(0,0,0,.45);--font-body:'Source Sans 3','Helvetica Neue',sans-serif;}
 *,*:before,*:after{box-sizing:border-box}
 html,body{background:var(--color-bg);margin:0}
@@ -76,7 +105,7 @@ body{font-family:var(--font-body);color:var(--color-text);overflow:hidden;height
       <span class="pill">ITIL Service Delivery</span>
       <span class="pill">Enterprise Microsoft Stack</span>
     </div>
-    <p class="reveal mt-6" style="font-size:.9rem;color:#8fa3be;">adammust10@gmail.com · +44 792 5050 333</p>
+    <p class="reveal mt-6 mobile-only" style="font-size:.95rem;color:#8fa3be;">Swipe left/right or use the arrows below.</p><p class="reveal mt-6 desktop-only" style="font-size:.9rem;color:#8fa3be;">adammust10@gmail.com · +44 792 5050 333</p>
   </div>
 </div>
 
