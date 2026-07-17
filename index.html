@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="slides-format" content="viewport">
+<title>Adam Mustafa | EG Group IT Infrastructure Engineer Interview Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style type="text/tailwindcss">
+@theme {
+  --color-bg:#0c1929;
+  --color-bg-deep:#060e1a;
+  --color-surface:#142237;
+  --color-text:#f2efe8;
+  --color-text-secondary:#cdd6e8;
+  --color-text-muted:#8fa3be;
+  --color-accent-1:#1b5ea6;
+  --color-accent-2:#e8c96a;
+  --color-accent-3:#4e9fc9;
+  --color-glass-bg:rgba(255,255,255,0.05);
+  --color-glass-border:rgba(255,255,255,0.10);
+  --color-vignette:rgba(0,0,0,0.45);
+  --font-display:'Playfair Display', Georgia, serif;
+  --font-body:'Source Sans 3', 'Helvetica Neue', sans-serif;
+}
+</style>
+<style>
+
+@media (max-width: 900px){
+  body{overflow:auto;height:auto;width:100%;-webkit-text-size-adjust:100%;}
+  .deck{height:auto;min-height:100vh}
+  .slide{position:relative;inset:auto;min-height:100vh;height:auto;padding-bottom:92px;transform:none}
+  .slide>.content{padding:clamp(1rem,4vw,2rem);max-width:100%}
+  .nav-controls{bottom:12px;left:50%;transform:translateX(-50%);padding:8px 14px;gap:10px}
+  .nav-btn{width:36px;height:36px;font-size:1.1rem}
+  .slide-counter{display:none}
+  .slide-dots{gap:6px;max-width:52vw;overflow:auto;padding-bottom:2px}
+  .dot{width:8px;height:8px;flex:0 0 auto}
+  .qgrid,.grid-3,.grid-4{grid-template-columns:1fr!important}
+  .mobile-stack{grid-template-columns:1fr!important}
+  .desktop-only{display:none!important}
+  .mobile-only{display:block!important}
+  h1{font-size:clamp(2.1rem,10vw,3.7rem)!important}
+  h2{font-size:clamp(1.6rem,7vw,2.4rem)!important}
+  p,li{font-size:1rem!important;line-height:1.6!important}
+}
+@media (min-width: 901px){
+  .mobile-only{display:none!important}
+}
+@media print{
+  body{overflow:visible;height:auto;width:100%}
+  .nav-controls,.mouse-spotlight{display:none!important}
+  .slide{position:relative;opacity:1!important;transform:none!important;pointer-events:auto!important;page-break-after:always;min-height:100vh}
+  .slide:last-child{page-break-after:auto}
+}
+:root{--color-bg:#0c1929;--color-text:#f2efe8;--glow-color-rgb:27,94,166;--color-glass-bg:rgba(255,255,255,.05);--color-glass-border:rgba(255,255,255,.10);--color-vignette:rgba(0,0,0,.45);--font-body:'Source Sans 3','Helvetica Neue',sans-serif;}
+*,*:before,*:after{box-sizing:border-box}
+html,body{background:var(--color-bg);margin:0}
+body{font-family:var(--font-body);color:var(--color-text);overflow:hidden;height:100vh;width:100vw}
+.deck{width:100vw;height:100vh;position:relative}
+.slide{position:absolute;inset:0;background:var(--color-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:scale(.96);transition:opacity .7s ease,transform .7s ease;pointer-events:none;overflow:hidden}
+.slide.active{opacity:1;transform:scale(1);pointer-events:all}
+.slide>.content{position:relative;z-index:2;width:100%;max-width:1160px;padding:clamp(1rem,3vw,3rem)}
+.nav-controls{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;z-index:100;background:rgba(255,255,255,.06);backdrop-filter:blur(12px);padding:10px 24px;border-radius:40px;border:1px solid rgba(255,255,255,.10)}
+.nav-btn{width:40px;height:40px;border:none;background:rgba(255,255,255,.06);color:#e8c96a;border-radius:50%;font-size:1.3rem;cursor:pointer;transition:background .2s}
+.nav-btn:hover{background:rgba(255,255,255,.12)}
+.slide-dots{display:flex;gap:8px}.dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.18);cursor:pointer;transition:background .3s,transform .3s}.dot.active{background:#e8c96a;transform:scale(1.3)}.slide-counter{font-size:.82rem;color:#8fa3be;min-width:44px;text-align:center}
+.reveal{opacity:0;transform:translateY(22px)}
+.gradient-mesh{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}.blob{position:absolute;border-radius:50%;filter:blur(90px);animation:float-slow 12s ease-in-out infinite}.blob:nth-child(2){animation:float-drift 17s ease-in-out infinite}.blob:nth-child(3){animation:float-slow 20s ease-in-out infinite reverse}.blob:nth-child(4){animation:float-drift 14s ease-in-out 2s infinite}
+.slide::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px 256px;opacity:.03;mix-blend-mode:overlay}
+.slide::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at center,transparent 50%,var(--color-vignette) 100%)}
+@keyframes float-slow{0%{transform:translate(0,0) scale(1)}25%{transform:translate(55px,-45px) scale(1.1)}50%{transform:translate(-35px,40px) scale(.92)}75%{transform:translate(45px,18px) scale(1.07)}100%{transform:translate(0,0) scale(1)}}
+@keyframes float-drift{0%{transform:translate(0,0) scale(1) rotate(0deg)}33%{transform:translate(-50px,-55px) scale(1.13) rotate(2deg)}66%{transform:translate(38px,28px) scale(.9) rotate(-2deg)}100%{transform:translate(0,0) scale(1) rotate(0deg)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes glow-pulse{0%,100%{text-shadow:0 0 20px rgba(27,94,166,.5),0 0 40px rgba(27,94,166,.2)}50%{text-shadow:0 0 32px rgba(232,201,106,.7),0 0 60px rgba(232,201,106,.3)}}
+.text-glow{text-shadow:0 0 20px rgba(27,94,166,.45),0 0 40px rgba(27,94,166,.2)}.gold-glow{text-shadow:0 0 20px rgba(232,201,106,.55),0 0 40px rgba(232,201,106,.25);animation:glow-pulse 3.5s ease-in-out infinite}
+.glass{background:rgba(255,255,255,.05);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.10);border-radius:20px;box-shadow:0 16px 50px rgba(0,0,0,.18)}
+.accent-border{border-left:4px solid #1b5ea6}.gold-border{border-left:4px solid #e8c96a}.bar-track{height:18px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;border:1px solid rgba(255,255,255,.08)}.bar-fill{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,#1b5ea6,#e8c96a)}
+.pill{display:inline-block;border:1px solid rgba(232,201,106,.35);background:rgba(232,201,106,.08);border-radius:999px;padding:.3rem .85rem;font-size:.9rem}.compass{font-size:3rem;animation:float 3.5s ease-in-out infinite}.stat-num{font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:900;font-family:'Playfair Display',serif}.tag{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#8fa3be}.check::before{content:'✓ ';color:#e8c96a}
+</style>
+</head>
+<body>
+<div class="mouse-spotlight" style="position:fixed;inset:0;z-index:99;pointer-events:none;"></div>
+<div class="deck">
+
+<div class="slide active" data-slide="1">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:580px;height:580px;top:-130px;right:-100px;background:#1b5ea6;opacity:.18"></div>
+    <div class="blob" style="width:350px;height:350px;bottom:-80px;left:-60px;background:#e8c96a;opacity:.10"></div>
+    <div class="blob" style="width:260px;height:260px;top:48%;left:8%;background:#4e9fc9;opacity:.10"></div>
+  </div>
+  <canvas class="particle-canvas" style="position:absolute;inset:0;z-index:1;"></canvas>
+  <div class="content text-center">
+    <div class="compass reveal mb-2">🧭</div>
+    <div class="reveal mb-1" style="font-size:.78rem;letter-spacing:.25em;text-transform:uppercase;color:#8fa3be;">EG Group Group plc · IT Infrastructure Engineer · Interview Presentation</div>
+    <h1 class="reveal font-display mb-3" style="font-size:clamp(2.6rem,6vw,5rem);font-weight:900;background:linear-gradient(135deg,#1b5ea6 0%,#e8c96a 55%,#4e9fc9 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1">Adam Mustafa</h1>
+    <p class="reveal font-display mb-5" style="font-size:clamp(1.1rem,2vw,1.7rem);font-style:italic;color:#cdd6e8;">Ready to strengthen EG Group's infrastructure and operations</p>
+    <div class="reveal" style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+      <span class="pill">Windows Server & Active Directory</span>
+      <span class="pill">Networking & monitoring</span>
+      <span class="pill">Escalation & incident handling</span>
+      <span class="pill">Infrastructure & automation</span>
+    </div>
+    <p class="reveal mt-6 mobile-only" style="font-size:.95rem;color:#8fa3be;">Swipe left/right or use the arrows below.</p><p class="reveal mt-6 desktop-only" style="font-size:.9rem;color:#8fa3be;">adammust10@gmail.com · +44 792 5050 333</p>
+  </div>
+</div>
+
+<div class="slide" data-slide="2">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:360px;height:360px;top:-90px;right:-80px;background:#1b5ea6;opacity:.09"></div>
+    <div class="blob" style="width:260px;height:260px;bottom:-60px;left:-40px;background:#e8c96a;opacity:.07"></div>
+  </div>
+  <div class="content">
+    <p class="tag reveal mb-2">Why EG Group</p>
+    <h2 class="font-display reveal mb-6" style="font-size:clamp(1.9rem,4vw,2.9rem);font-weight:700;">What EG Group needs vs what I already do</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;">
+      <div class="glass p-7 reveal" style="border-top:3px solid #1b5ea6;">
+        <div class="tag mb-3">About EG Group</div>
+        <p style="font-size:1.2rem;line-height:1.65;color:#cdd6e8;">EG Group is a leading global convenience retailer, operating fuel, foodservice and grocery brands across 7 countries. The company focuses on innovation, customer service and efficient operations.</p>
+        <div class="mt-4" style="font-size:.95rem;color:#8fa3be;">Global convenience retailer · 7 countries · strong focus on infrastructure, operations and growth</div>
+      </div>
+      <div class="glass p-7 reveal" style="border-top:3px solid #e8c96a;">
+        <div class="tag mb-3">Why this role matters for infrastructure</div>
+        <ul style="font-size:1.1rem;line-height:1.7;color:#cdd6e8;list-style:none;padding:0;">
+          <li class="check">Infrastructure controls protect client trust and sensitive data</li>
+          <li class="check">Strong infrastructure and incident management protects availability and reduces operational risk</li>
+          <li class="check">Monitoring, backup and documentation support resilience and audit readiness</li>
+          <li class="check">Empathy and collaboration align with my support style</li>
+        </ul>
+      </div>
+      <div class="glass p-6 reveal accent-border" style="grid-column:span 2;">
+        <p style="font-size:1.1rem;color:#cdd6e8;">I am applying because this role sits where security, service, and governance meet — exactly the space where I want to build my career and where my current experience already gives me a strong foundation.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-slide="3">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:380px;height:380px;top:-80px;right:-80px;background:#4e9fc9;opacity:.08"></div>
+    <div class="blob" style="width:270px;height:270px;bottom:-60px;left:-50px;background:#1b5ea6;opacity:.07"></div>
+  </div>
+  <div class="content">
+    <p class="tag reveal mb-2">The EG Group brief and my evidence</p>
+    <h2 class="font-display reveal mb-5" style="font-size:clamp(1.9rem,4vw,2.9rem);font-weight:700;">The EG Group brief and my evidence</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;">
+      <div class="glass p-7 reveal">
+        <div class="tag mb-4" style="color:#4e9fc9;">What you’ll be doing at EG Group</div>
+        <ul style="font-size:1.05rem;line-height:1.75;color:#cdd6e8;list-style:none;padding:0;">
+          <li>🛠️ Plan, implement and document infrastructure changes with the Infrastructure Manager</li>
+          <li>🚨 Act as an escalation point for complex infrastructure incidents</li>
+          <li>📡 Monitor system alerts and protect service availability and performance</li>
+          <li>🧪 Support testing, review and enhancement of business continuity and DR plans</li>
+          <li>🤝 Provide guidance and expertise to the IT Service Desk on infrastructure issues</li>
+          <li>📈 Spot and deliver improvements to infrastructure, processes and systems</li>
+          <li>📚 Maintain SOPs, process flows and knowledge base articles</li>
+          <li>🤝 Clear stakeholder communication in a regulated environment</li>
+          <li>🔍 Incident, request & problem management to SLA standards</li>
+        </ul>
+      </div>
+      <div class="glass p-7 reveal">
+        <div class="tag mb-4" style="color:#e8c96a;">My matching evidence (live, current role)</div>
+        <ul style="font-size:1.05rem;line-height:1.75;color:#cdd6e8;list-style:none;padding:0;">
+          <li class="check">User provisioning, device rollout and incident handling at EG OTM</li>
+          <li class="check">Daily Entra ID, Microsoft 365 & endpoint device management</li>
+          <li class="check">Windows OS, Intune enrolment, imaging & compliance enforcement</li>
+          <li class="check">ITIL incidents & service requests via Autotask, SLA-compliant delivery</li>
+          <li class="check">Technical documentation, knowledge base & IT asset inventory</li>
+          <li class="check">Remote support and multi-site infrastructure troubleshooting</li>
+          <li class="check">Regular troubleshooting of DNS, DHCP, VPN and Wi-Fi issues across sites</li>
+          <li class="check">Supporting planned changes (e.g. config tweaks, firmware updates) under change control</li>
+          <li class="check">Helping restore service during outages by gathering logs, testing fixes and validating recovery</li>
+          <li class="check">Using monitoring and alerts to spot issues early and escalate appropriately</li>
+        </ul>
+      </div>
+    </div>
+    <div class="reveal mt-4 glass p-5 gold-border">
+      <p style="font-size:1rem;color:#cdd6e8;">Key message: I am not trying to pivot blindly into infrastructure. I already work in the operational core of access management and can grow quickly into formal infrastructure ownership.</p>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-slide="4">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:340px;height:340px;top:-80px;right:-70px;background:#1b5ea6;opacity:.09"></div>
+    <div class="blob" style="width:250px;height:250px;bottom:-60px;left:-50px;background:#e8c96a;opacity:.07"></div>
+  </div>
+  <div class="content">
+    <p class="tag reveal mb-2">Experience</p>
+    <h2 class="font-display reveal mb-5" style="font-size:clamp(1.9rem,4vw,2.9rem);font-weight:700;">My professional story in three chapters</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;">
+      <div class="glass p-6 reveal" style="border-top:3px solid #1b5ea6;">
+        <div class="tag mb-2">Nov 2025 – Present</div>
+        <div class="font-display mb-2" style="font-size:1.3rem;font-weight:700;color:#e8c96a;">Service Desk Analyst</div>
+        <div style="font-size:.95rem;color:#8fa3be;margin-bottom:.8rem;">EG OTM · Blackburn</div>
+        <ul style="font-size:.98rem;line-height:1.65;color:#cdd6e8;list-style:none;padding:0;">
+          <li class="check">Entra ID, Intune & Windows endpoint management</li>
+          <li class="check">infrastructure support and stability, provisioning & access control daily</li>
+          <li class="check">ITIL incident & request management</li>
+          <li class="check">DNS, DHCP, VPN & network troubleshooting</li>
+          <li class="check">Device rollouts, documentation & knowledge base</li>
+        </ul>
+      </div>
+      <div class="glass p-6 reveal" style="border-top:3px solid #4e9fc9;">
+        <div class="tag mb-2">Feb 2024 – Oct 2025</div>
+        <div class="font-display mb-2" style="font-size:1.3rem;font-weight:700;color:#e8c96a;">Data Cloud Engineer & Analyst</div>
+        <div style="font-size:.95rem;color:#8fa3be;margin-bottom:.8rem;">CHEP · Manchester</div>
+        <ul style="font-size:.98rem;line-height:1.65;color:#cdd6e8;list-style:none;padding:0;">
+          <li class="check">AWS & Databricks enterprise data infrastructure</li>
+          <li class="check">Python ETL pipelines and automation</li>
+          <li class="check">Stakeholder workshops & leadership presentations</li>
+          <li class="check">IoT data analysis supporting strategic decisions</li>
+          <li class="check">1st Place, Brambles Digi Week Innovation Challenge</li>
+        </ul>
+      </div>
+      <div class="glass p-6 reveal" style="border-top:3px solid #e8c96a;">
+        <div class="tag mb-2">Education & recognition</div>
+        <div class="font-display mb-2" style="font-size:1.3rem;font-weight:700;color:#e8c96a;">Academic & Professional</div>
+        <div style="font-size:.95rem;color:#8fa3be;margin-bottom:.8rem;">Birmingham · Salford</div>
+        <ul style="font-size:.98rem;line-height:1.65;color:#cdd6e8;list-style:none;padding:0;">
+          <li class="check">MSc Computer Science (Merit) – Birmingham</li>
+          <li class="check">BSc Accounting & Finance (First Class) – Salford</li>
+          <li class="check">Microsoft Azure Fundamentals (AZ-900)</li>
+          <li class="check">AWS Cloud Practitioner</li>
+          <li class="check">Course Representative of the Year, University of Salford Students' Union</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-slide="5">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:370px;height:370px;top:-90px;right:-80px;background:#e8c96a;opacity:.08"></div>
+    <div class="blob" style="width:270px;height:270px;bottom:-70px;left:-50px;background:#1b5ea6;opacity:.08"></div>
+  </div>
+  <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
+  <div class="content">
+    <p class="tag reveal mb-2">Infrastructure focus</p>
+    <h2 class="font-display reveal mb-5" style="font-size:clamp(1.9rem,4vw,2.9rem);font-weight:700;">Where I plug into the infrastructure stack</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px;">
+      <div class="glass p-6 reveal" style="border-top:3px solid #1b5ea6;">
+        <div class="tag mb-2">Endpoints & OS</div>
+        <h3 style="font-size:1.05rem;font-weight:600;margin-bottom:.4rem;">Windows & devices</h3>
+        <p style="font-size:.9rem;color:#cdd6e8;line-height:1.6;">Windows 10/11 support, Intune imaging, enrolment and compliance for enterprise endpoints.</p>
+      </div>
+      <div class="glass p-6 reveal" style="border-top:3px solid #4e9fc9;">
+        <div class="tag mb-2">Directory</div>
+        <h3 style="font-size:1.05rem;font-weight:600;margin-bottom:.4rem;">AD / Entra ID</h3>
+        <p style="font-size:.9rem;color:#cdd6e8;line-height:1.6;">Account management, groups and permissions as part of supporting core Microsoft infrastructure.</p>
+      </div>
+      <div class="glass p-6 reveal" style="border-top:3px solid #e8c96a;">
+        <div class="tag mb-2">Networking</div>
+        <h3 style="font-size:1.05rem;font-weight:600;margin-bottom:.4rem;">Connectivity & access</h3>
+        <p style="font-size:.9rem;color:#cdd6e8;line-height:1.6;">DNS, DHCP, VPN and Wi-Fi troubleshooting across multi-site environments.</p>
+      </div>
+      <div class="glass p-6 reveal" style="border-top:3px solid #7fd4a5;">
+        <div class="tag mb-2">Monitoring & docs</div>
+        <h3 style="font-size:1.05rem;font-weight:600;margin-bottom:.4rem;">Visibility & knowledge</h3>
+        <p style="font-size:.9rem;color:#cdd6e8;line-height:1.6;">Using alerts, tickets and clear documentation to keep infrastructure stable and support teams effective.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="slide" data-slide="6">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:350px;height:350px;top:-80px;right:-80px;background:#1b5ea6;opacity:.09"></div>
+    <div class="blob" style="width:270px;height:270px;bottom:-60px;left:-50px;background:#4e9fc9;opacity:.07"></div>
+  </div>
+  <div class="content">
+    <p class="tag reveal mb-2">Values alignment</p>
+    <h2 class="font-display reveal mb-5" style="font-size:clamp(1.9rem,4vw,2.9rem);font-weight:700;">How I reflect EG Group culture and values</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+      <div class="glass p-7 reveal" style="border-top:3px solid #1b5ea6;">
+        <div style="font-size:1.5rem;margin-bottom:.5rem;">🎯</div>
+        <div class="font-display mb-2" style="font-size:1.3rem;font-weight:700;color:#e8c96a;">Good results, long-term thinking</div>
+        <p style="font-size:1rem;color:#cdd6e8;line-height:1.65;">I work with discipline and accuracy so that access decisions do not just solve today's request, but support long-term operational stability and secure service delivery.</p>
+      </div>
+      <div class="glass p-7 reveal" style="border-top:3px solid #e8c96a;">
+        <div style="font-size:1.5rem;margin-bottom:.5rem;">🤝</div>
+        <div class="font-display mb-2" style="font-size:1.3rem;font-weight:700;color:#e8c96a;">Deep and meaningful relationships</div>
+        <p style="font-size:1rem;color:#cdd6e8;line-height:1.65;">I build trust by being reliable, clear, and professional with users and stakeholders — especially when dealing with access changes that affect productivity and risk.</p>
+      </div>
+      <div class="glass p-7 reveal" style="border-top:3px solid #4e9fc9;">
+        <div style="font-size:1.5rem;margin-bottom:.5rem;">🏛️</div>
+        <div class="font-display mb-2" style="font-size:1.3rem;font-weight:700;color:#e8c96a;">Responsible behaviours</div>
+        <p style="font-size:1rem;color:#cdd6e8;line-height:1.65;">In infrastructure work, responsibility means accurate provisioning, prompt deprovisioning, clean evidence, and a refusal to compromise on governance or process standards.</p>
+      </div>
+      <div class="glass p-7 reveal" style="border-top:3px solid #8fa3be;">
+        <div style="font-size:1.5rem;margin-bottom:.5rem;">💡</div>
+        <div class="font-display mb-2" style="font-size:1.3rem;font-weight:700;color:#e8c96a;">Empathy and collaboration</div>
+        <p style="font-size:1rem;color:#cdd6e8;line-height:1.65;">My support style is people-first: understand the need, explain clearly, work well with other teams, and help the business get the right outcome without losing control.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-slide="7">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:340px;height:340px;top:-80px;right:-80px;background:#e8c96a;opacity:.07"></div>
+    <div class="blob" style="width:270px;height:270px;bottom:-60px;left:-50px;background:#1b5ea6;opacity:.07"></div>
+  </div>
+  <div class="content">
+    <p class="tag reveal mb-2">Real work, real evidence</p>
+    <h2 class="font-display reveal mb-5" style="font-size:clamp(1.9rem,4vw,2.9rem);font-weight:700;">Real work, real evidence</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+      <div class="glass p-7 reveal">
+        <div class="tag mb-2" style="color:#4e9fc9;">Story 1 · Infrastructure stability</div>
+        <h3 style="font-size:1.2rem;font-weight:600;margin-bottom:.6rem;">Supporting infrastructure stability across a multi-site environment</h3>
+        <p style="font-size:.98rem;color:#cdd6e8;line-height:1.65;">At EG OTM, I support infrastructure and networking issues across a multi-site environment, including endpoint access, connectivity, and core Microsoft services. I’ve also contributed to rollouts, upgrades, migrations, and connectivity improvements, which means I’ve had exposure both to reactive support and to planned changes that strengthen platform stability and day-to-day service performance.</p>
+      </div>
+      <div class="glass p-7 reveal">
+        <div class="tag mb-2" style="color:#e8c96a;">Story 2 · Cloud platform reliability</div>
+        <h3 style="font-size:1.2rem;font-weight:600;margin-bottom:.6rem;">Keeping CHEP’s AWS / Databricks data platform stable</h3>
+        <p style="font-size:.98rem;color:#cdd6e8;line-height:1.65;">At CHEP I helped keep an AWS/Databricks data platform reliable by monitoring jobs, storage and compute, and investigating failures. When key ETL pipelines or Databricks jobs broke, I used logs and metrics to identify causes such as bad data, configuration issues or resource limits, then fixed them myself with other engineers. This reduced job failures, improved data availability and made downstream reporting more stable.</p>
+      </div>
+      <div class="glass p-7 reveal">
+        <div class="tag mb-2" style="color:#1b5ea6;">Story 3 · Infrastructure troubleshooting</div>
+        <h3 style="font-size:1.2rem;font-weight:600;margin-bottom:.6rem;">Network, VPN and connectivity issues</h3>
+        <p style="font-size:.98rem;color:#cdd6e8;line-height:1.65;">Resolving access-related problems across DNS, DHCP, TCP/IP, and VPN shows that I can troubleshoot across systems calmly and logically, rather than seeing infrastructure issues in isolation.</p>
+      </div>
+      <div class="glass p-7 reveal">
+        <div class="tag mb-2" style="color:#8fa3be;">Story 4 · Stakeholder influence</div>
+        <h3 style="font-size:1.2rem;font-weight:600;margin-bottom:.6rem;">Cross-functional work at CHEP</h3>
+        <p style="font-size:.98rem;color:#cdd6e8;line-height:1.65;">At CHEP I worked across operations, finance, and commercial teams and presented insights to senior leadership, which demonstrates that I can engage confidently with stakeholders beyond pure technical support.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-slide="8">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:360px;height:360px;top:-90px;right:-80px;background:#4e9fc9;opacity:.08"></div>
+    <div class="blob" style="width:260px;height:260px;bottom:-60px;left:-50px;background:#e8c96a;opacity:.07"></div>
+  </div>
+  <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
+  <div class="content">
+    <p class="tag reveal mb-2">Infrastructure approach</p>
+    <h2 class="font-display reveal mb-6" style="font-size:clamp(1.9rem,4vw,2.9rem);font-weight:700;">How I would operate as an Infrastructure Engineer</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;">
+      <div class="glass p-7 reveal" style="border-top:3px solid #1b5ea6;">
+        <div class="stat-num text-glow mb-2" style="font-size:3rem;font-family:'Playfair Display',serif;">1</div>
+        <div class="tag mb-3" style="font-size:.8rem;">Learn</div>
+        <ul style="font-size:.98rem;line-height:1.7;color:#cdd6e8;list-style:none;padding:0;">
+          <li class="check">Understand servers, hypervisors, backup, monitoring and networks</li>
+          <li class="check">Learn how BC/DR works in practice and where risks are</li>
+          <li class="check">Shadow infra engineers on incidents and changes</li>
+        </ul>
+      </div>
+      <div class="glass p-7 reveal" style="border-top:3px solid #4e9fc9;">
+        <div class="stat-num text-glow mb-2" style="font-size:3rem;font-family:'Playfair Display',serif;">2</div>
+        <div class="tag mb-3" style="font-size:.8rem;">Deliver</div>
+        <ul style="font-size:.98rem;line-height:1.7;color:#cdd6e8;list-style:none;padding:0;">
+          <li class="check">Own clearly-defined incidents (endpoint and connectivity)</li>
+          <li class="check">Contribute to planned infra changes with rollback plans</li>
+          <li class="check">Keep fixes and changes documented so the team can reuse them</li>
+        </ul>
+      </div>
+      <div class="glass p-7 reveal" style="border-top:3px solid #e8c96a;">
+        <div class="stat-num gold-glow mb-2" style="font-size:3rem;font-family:'Playfair Display',serif;">3</div>
+        <div class="tag mb-3" style="font-size:.8rem;">Improve</div>
+        <ul style="font-size:.98rem;line-height:1.7;color:#cdd6e8;list-style:none;padding:0;">
+          <li class="check">Spot recurring issues and suggest practical fixes or automation</li>
+          <li class="check">Use monitoring and alerts to reduce noise and highlight real problems</li>
+          <li class="check">Help make infra documentation clearer and easier to use</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-slide="9">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:350px;height:350px;top:-90px;right:-80px;background:#1b5ea6;opacity:.09"></div>
+    <div class="blob" style="width:260px;height:260px;bottom:-60px;left:-50px;background:#e8c96a;opacity:.08"></div>
+  </div>
+  <div class="content">
+    <p class="tag reveal mb-2">Impact at EG Group</p>
+    <h2 class="font-display reveal mb-6" style="font-size:clamp(1.9rem,4vw,2.9rem);font-weight:700;">Where I would make an impact at EG Group</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+      <div class="glass p-7 reveal" style="border-top:3px solid #1b5ea6;">
+        <div class="tag mb-3">1 · Infrastructure stability</div>
+        <h3 style="font-size:1.25rem;font-weight:700;color:#e8c96a;margin-bottom:.6rem;">Faster resolution, fewer repeat issues</h3>
+        <p style="font-size:1rem;color:#cdd6e8;line-height:1.65;">I already work across endpoint, networking and Microsoft service issues in a multi-site environment, so I can help improve stability by resolving incidents properly, spotting patterns, and reducing repeat faults.</p>
+      </div>
+      <div class="glass p-7 reveal" style="border-top:3px solid #4e9fc9;">
+        <div class="tag mb-3">2 · Changes and deployments</div>
+        <h3 style="font-size:1.25rem;font-weight:700;color:#e8c96a;margin-bottom:.6rem;">Reliable delivery of rollouts, upgrades and migrations</h3>
+        <p style="font-size:1rem;color:#cdd6e8;line-height:1.65;">My current role already includes rollouts, upgrades, migrations and connectivity improvements, so I can contribute to planned infrastructure changes in a controlled and well-documented way.</p>
+      </div>
+      <div class="glass p-7 reveal" style="border-top:3px solid #e8c96a;">
+        <div class="tag mb-3">3 · Monitoring and resilience</div>
+        <h3 style="font-size:1.25rem;font-weight:700;color:#e8c96a;margin-bottom:.6rem;">Better visibility into service health</h3>
+        <p style="font-size:1rem;color:#cdd6e8;line-height:1.65;">From cloud platform support, Azure labs, and monitoring projects using Prometheus/Grafana and Azure Monitor, I can bring a mindset of proactive monitoring, alerting and availability improvement.</p>
+      </div>
+      <div class="glass p-7 reveal" style="border-top:3px solid #8fa3be;">
+        <div class="tag mb-3">4 · Documentation and team enablement</div>
+        <h3 style="font-size:1.25rem;font-weight:700;color:#e8c96a;margin-bottom:.6rem;">Clear SOPs and knowledge that improve support quality</h3>
+        <p style="font-size:1rem;color:#cdd6e8;line-height:1.65;">I already maintain documentation, knowledge articles and asset records, and I’d bring that same discipline to infrastructure runbooks, support documentation and handover quality.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-slide="10">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:580px;height:580px;top:-130px;right:-100px;background:#1b5ea6;opacity:.16"></div>
+    <div class="blob" style="width:360px;height:360px;bottom:-90px;left:-70px;background:#e8c96a;opacity:.12"></div>
+    <div class="blob" style="width:250px;height:250px;top:46%;left:10%;background:#4e9fc9;opacity:.10"></div>
+  </div>
+  <canvas class="particle-canvas" style="position:absolute;inset:0;z-index:1;"></canvas>
+  <div class="content text-center">
+    <div class="compass reveal mb-2">🏛️</div>
+    <p class="tag reveal mb-2">Closing statement</p>
+    <h2 class="reveal font-display mb-4" style="font-size:clamp(2.2rem,5vw,4.2rem);font-weight:900;background:linear-gradient(135deg,#1b5ea6 0%,#e8c96a 55%,#4e9fc9 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.15;">Ready to add value<br>from the start</h2>
+    <p class="reveal mb-6" style="font-size:clamp(1rem,1.7vw,1.4rem);color:#cdd6e8;max-width:860px;margin-left:auto;margin-right:auto;line-height:1.7;">I bring current hands-on access management experience, strong Microsoft platform exposure, the discipline needed in a regulated environment, and the professionalism to represent EG Group well from day one.</p>
+    <div class="reveal" style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:700px;margin:0 auto 1.5rem;">
+      <div class="glass p-4" style="text-align:center;">
+        <div style="font-size:1.6rem;margin-bottom:.4rem;">🔐</div>
+        <div style="font-size:.9rem;font-weight:600;color:#e8c96a;">Infrastructure-ready</div>
+        <div style="font-size:.82rem;color:#8fa3be;">Current daily infrastructure support and stability and access administration</div>
+      </div>
+      <div class="glass p-4" style="text-align:center;">
+        <div style="font-size:1.6rem;margin-bottom:.4rem;">🏆</div>
+        <div style="font-size:.9rem;font-weight:600;color:#e8c96a;">Recognised</div>
+        <div style="font-size:.82rem;color:#8fa3be;">Innovation award and student leadership recognition</div>
+      </div>
+      <div class="glass p-4" style="text-align:center;">
+        <div style="font-size:1.6rem;margin-bottom:.4rem;">📈</div>
+        <div style="font-size:.9rem;font-weight:600;color:#e8c96a;">Growth path</div>
+        <div style="font-size:.82rem;color:#8fa3be;">Support, infrastructure, and stakeholder depth</div>
+      </div>
+    </div>
+    <div class="reveal" style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+      <span class="pill">Adam Mustafa</span>
+      <span class="pill">adammust10@gmail.com</span>
+      <span class="pill">+44 792 5050 333</span>
+    </div>
+  </div>
+</div>
+
+</div>
+<div class="nav-controls">
+  <button class="nav-btn" onclick="changeSlide(-1)" aria-label="Previous">&#8249;</button>
+  <div class="slide-dots" id="dots"></div>
+  <button class="nav-btn" onclick="changeSlide(1)" aria-label="Next">&#8250;</button>
+  <span class="slide-counter" id="counter">1 / 10</span>
+</div>
+<script>
+let current=1;const total=document.querySelectorAll('.slide').length;const dotsContainer=document.getElementById('dots');const counter=document.getElementById('counter');for(let i=1;i<=total;i++){const dot=document.createElement('div');dot.className='dot'+(i===1?' active':'');dot.onclick=()=>goToSlide(i);dotsContainer.appendChild(dot);}function goToSlide(n){const prev=document.querySelector('.slide.active');const next=document.querySelector(`.slide[data-slide="${n}"]`);if(prev)prev.classList.remove('active');if(next){next.classList.add('active');animateSlide(next);}current=n;updateNav();}function changeSlide(dir){let next=current+dir;if(next<1)next=total;if(next>total)next=1;goToSlide(next);}function updateNav(){document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i+1===current));counter.textContent=current+' / '+total;}document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();changeSlide(1);}if(e.key==='ArrowLeft'){e.preventDefault();changeSlide(-1);}});let touchX=0;document.addEventListener('touchstart',e=>{touchX=e.touches[0].clientX;});document.addEventListener('touchend',e=>{const diff=touchX-e.changedTouches[0].clientX;if(Math.abs(diff)>50)changeSlide(diff>0?1:-1);});function animateSlide(slide){slide.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transition='none';el.style.opacity='0';el.style.transform='translateY(22px)';el.offsetHeight;const d=i*.075;el.style.transition=`opacity .38s ease ${d}s, transform .38s ease ${d}s`;el.style.opacity='1';el.style.transform='translateY(0)';});animateEffects(slide);}function animateEffects(slide){slide.querySelectorAll('.bar-fill:not(.fill-init)').forEach((bar,i)=>{bar.classList.add('fill-init');bar.style.transition=`width .65s ease ${i*.1}s`;bar.offsetHeight;bar.style.width=bar.dataset.width;});}document.addEventListener('mousemove',e=>{const s=document.querySelector('.mouse-spotlight');if(s){const rgb='27,94,166';s.style.background=`radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, rgba(${rgb},0.06), transparent 40%)`;}});window.initParticles=function(canvas,opts){if(!canvas)return;const ctx=canvas.getContext('2d');canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;const interactive=opts.interactive!==false;const count=opts.count||(interactive?55:18);let mx=-1000,my=-1000;const [r,g,b]=[27,94,166];const ps=Array.from({length:count},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,size:Math.random()*2.5+.8,alpha:Math.random()*.35+.1}));if(interactive){canvas.addEventListener('mousemove',e=>{const rect=canvas.getBoundingClientRect();mx=e.clientX-rect.left;my=e.clientY-rect.top;});canvas.addEventListener('mouseleave',()=>{mx=-1000;my=-1000;});}(function anim(){ctx.clearRect(0,0,canvas.width,canvas.height);ps.forEach(p=>{if(interactive){const dx=p.x-mx,dy=p.y-my,d=Math.sqrt(dx*dx+dy*dy);if(d<120){const f=(120-d)/120*2;p.vx+=(dx/d)*f*.1;p.vy+=(dy/d)*f*.1;}}p.vx*=.98;p.vy*=.98;p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=canvas.width;if(p.x>canvas.width)p.x=0;if(p.y<0)p.y=canvas.height;if(p.y>canvas.height)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle=`rgba(${r},${g},${b},${p.alpha})`;ctx.fill();});requestAnimationFrame(anim);})();};document.querySelectorAll('.particle-canvas').forEach(c=>window.initParticles(c,{interactive:true,count:55}));document.querySelectorAll('.particle-canvas-ambient').forEach(c=>window.initParticles(c,{interactive:false,count:18}));try{animateSlide(document.querySelector('.slide.active'));}catch(e){console.warn(e);}
+</script>
+</body>
+</html<div class="slide" data-slide="8">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:360px;height:360px;top:-90px;right:-80px;background:#1b5ea6;opacity:.08"></div>
+    <div class="blob" style="width:260px;height:260px;bottom:-60px;left:-40px;background:#e8c96a;opacity:.07"></div>
+  </div>
+  <div class="content">
+    <p class="tag reveal mb-2">Infrastructure approach</p>
+    <h2 class="font-display reveal mb-5" style="font-size:clamp(1.9rem,4vw,2.9rem);font-weight:700;">How I would approach my first 90 days in infrastructure</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;">
+      <div class="glass p-7 reveal" style="border-top:3px solid #1b5ea6;">
+        <div class="tag mb-3">0–30 days · Learn the estate</div>
+        <ul style="font-size:.96rem;line-height:1.7;color:#cdd6e8;list-style:none;padding:0;">
+          <li class="check">Map key systems: Windows Server, hypervisors, backup, monitoring and networks</li>
+          <li class="check">Understand existing BC/DR plans and where risks sit</li>
+          <li class="check">Shadow the Infrastructure Manager on changes and major incidents</li>
+          <li class="check">Build relationships with Service Desk and infra engineers</li>
+        </ul>
+      </div>
+      <div class="glass p-7 reveal" style="border-top:3px solid #4e9fc9;">
+        <div class="tag mb-3">31–60 days · Own key areas</div>
+        <ul style="font-size:.96rem;line-height:1.7;color:#cdd6e8;list-style:none;padding:0;">
+          <li class="check">Take ownership of defined incident types (e.g. endpoint and common network issues)</li>
+          <li class="check">Deliver small, controlled infrastructure changes with documented rollback plans</li>
+          <li class="check">Improve or create SOPs and KBs for infra-related Service Desk work</li>
+          <li class="check">Start using monitoring tools and alerts proactively</li>
+        </ul>
+      </div>
+      <div class="glass p-7 reveal" style="border-top:3px solid #e8c96a;">
+        <div class="tag mb-3">61–90 days · Improve & automate</div>
+        <ul style="font-size:.96rem;line-height:1.7;color:#cdd6e8;list-style:none;padding:0;">
+          <li class="check">Identify 1–2 recurring issues and propose practical fixes or automation (e.g. PowerShell checks)</li>
+          <li class="check">Contribute to DR tests or monitoring tuning</li>
+          <li class="check">Help make infra documentation clearer and easier to use</li>
+          <li class="check">Establish myself as a dependable escalation point in agreed areas</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="slide" data-slide="9">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:320px;height:320px;top:-80px;right:-80px;background:#1b5ea6;opacity:.07"></div>
+    <div class="blob" style="width:260px;height:260px;bottom:-60px;left:-40px;background:#e8c96a;opacity:.07"></div>
+  </div>
+  <div class="content">
+    <p class="tag reveal mb-2">Closing</p>
+    <h2 class="font-display reveal mb-5" style="font-size:clamp(1.9rem,4vw,2.9rem);font-weight:700;">Three reasons I would add value as an Infrastructure Engineer</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;">
+      <div class="glass p-7 reveal" style="border-top:3px solid #1b5ea6;">
+        <div class="tag mb-2">1 · Hands-on technical base</div>
+        <p style="font-size:.98rem;color:#cdd6e8;line-height:1.65;">I bring current, practical experience across Windows, Microsoft 365, Entra ID, Intune and core networking (DNS, DHCP, VPN, Wi-Fi, VLAN basics) in a live multi-site environment.</p>
+      </div>
+      <div class="glass p-7 reveal" style="border-top:3px solid #4e9fc9;">
+        <div class="tag mb-2">2 · Proven incident & service discipline</div>
+        <p style="font-size:.98rem;color:#cdd6e8;line-height:1.65;">I am used to working within ITIL processes, SLAs and change controls — restoring service quickly, communicating clearly with stakeholders and leaving a clean trail of documentation.</p>
+      </div>
+      <div class="glass p-7 reveal" style="border-top:3px solid #e8c96a;">
+        <div class="tag mb-2">3 · Strong growth trajectory in infrastructure</div>
+        <p style="font-size:.98rem;color:#cdd6e8;line-height:1.65;">My Azure, Proxmox and monitoring lab work shows that I am actively building infrastructure depth. I can contribute immediately while growing into broader infrastructure ownership at EG Group.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>>
