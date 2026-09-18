@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0e0a0b">
+  <meta name="robots" content="noindex, nofollow">
+  <title>For You</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="glow" aria-hidden="true"></canvas>
+
+  <!-- ============ OPENING SCREEN ============ -->
+  <section id="intro" class="screen is-active">
+    <div class="intro-inner">
+      <div class="avatar"><img src="profile.jpg" alt=""></div>
+
+      <!-- ✏️ EDIT: your opening line -->
+      <h1 class="intro-title">For you, Zahra</h1>
+
+      <!-- ✏️ EDIT: a short line underneath -->
+      <p class="intro-sub">A few of the moments that make you, you.</p>
+
+      <button id="begin" class="begin">
+        <span>Begin</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <p class="intro-hint">Best with sound on</p>
+    </div>
+  </section>
+
+  <!-- ============ SLIDESHOW + NOTE ============ -->
+  <section id="show" class="screen" aria-label="Slideshow">
+    <div class="media-pane" id="media-pane">
+      <div id="stage" class="stage"></div>
+
+      <div class="progress"><div id="progress-fill"></div></div>
+
+      <div id="caption" class="caption">
+        <span id="cap-album" class="cap-album"></span>
+        <span id="cap-date" class="cap-date"></span>
+      </div>
+
+      <button class="tap-zone tap-prev" aria-label="Previous"></button>
+      <button class="tap-zone tap-next" aria-label="Next"></button>
+
+      <div id="controls" class="controls">
+        <button id="btn-prev" aria-label="Previous (←)">
+          <svg viewBox="0 0 24 24"><path d="M15.5 5 8.5 12l7 7"/></svg>
+        </button>
+        <button id="btn-play" aria-label="Pause (space)">
+          <svg class="i-pause" viewBox="0 0 24 24"><path d="M9 5v14M15 5v14"/></svg>
+          <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" class="fill"/></svg>
+        </button>
+        <button id="btn-next" aria-label="Next (→)">
+          <svg viewBox="0 0 24 24"><path d="m8.5 5 7 7-7 7"/></svg>
+        </button>
+        <span class="divider"></span>
+        <button id="btn-mute" aria-label="Mute (M)">
+          <svg class="i-sound" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" class="fill"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>
+          <svg class="i-muted" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" class="fill"/><path d="m16 9.5 5 5m0-5-5 5"/></svg>
+        </button>
+        <button id="btn-shuffle" aria-label="Shuffle again">
+          <svg viewBox="0 0 24 24"><path d="M3 7h3.5c4.5 0 6.5 10 11 10H21M3 17h3.5c1.8 0 3-1.6 4.2-3.6M13.3 9.6C14.5 8.6 15.8 7 17.5 7H21M18 4l3 3-3 3M18 14l3 3-3 3"/></svg>
+        </button>
+        <span id="counter" class="counter"></span>
+      </div>
+    </div>
+
+    <!-- ============ THE NOTE (right quarter / bottom quarter on phones) ============ -->
+    <aside class="note-pane" aria-label="A note for you">
+      <p class="note-to">Zahra,</p>
+
+      <!-- ✏️ EDIT: these are your three messages. Change the words to your own. -->
+      <ul id="notes" class="notes">
+        <li>
+          <h2>I miss you.</h2>
+          <p>In all the small moments &mdash; your laugh, your voice, just having you around.</p>
+        </li>
+        <li>
+          <h2>I hope you&rsquo;re okay.</h2>
+          <p>Whatever you&rsquo;re going through right now, I hope it gets lighter soon, and that you&rsquo;re being gentle with yourself.</p>
+        </li>
+        <li>
+          <h2>I&rsquo;m here for you.</h2>
+          <p>Any time, day or night, for whatever you need. Take all the time you need &mdash; no pressure, and no need to reply.</p>
+        </li>
+      </ul>
+
+      <p class="note-sign">&mdash; Adam</p>
+      <div class="note-dots" id="note-dots" aria-hidden="true"></div>
+    </aside>
+  </section>
+
+  <script src="media.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
