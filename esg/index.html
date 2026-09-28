@@ -1,1 +1,862 @@
-h
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Adam Mustafa for ESG</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,600;112,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+    <style>
+    :root {
+        --ground: #EDF1F3;
+        --panel: #FFFFFF;
+        --ink: #12212B;
+        --muted: #546571;
+        --line: #D3DCE1;
+        --accent: #0B6E78;
+        --accent-soft: #D6ECEE;
+        --amber: #B86E00;
+        --amber-soft: #F6E6CC;
+        --display: "Archivo", "Arial Narrow", Arial, sans-serif;
+        --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+        --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+            color-scheme: dark;
+            --ground: #0F1A20;
+            --panel: #16252D;
+            --ink: #E4ECEF;
+            --muted: #94A8B2;
+            --line: #28404B;
+            --accent: #4FC3CE;
+            --accent-soft: #173A40;
+            --amber: #F2B155;
+            --amber-soft: #3A2C16;
+        }
+    }
+
+    :root[data-theme="dark"] {
+        color-scheme: dark;
+        --ground: #0F1A20;
+        --panel: #16252D;
+        --ink: #E4ECEF;
+        --muted: #94A8B2;
+        --line: #28404B;
+        --accent: #4FC3CE;
+        --accent-soft: #173A40;
+        --amber: #F2B155;
+        --amber-soft: #3A2C16;
+    }
+
+    * {
+        box-sizing: border-box
+    }
+
+    html, body {
+        margin: 0
+    }
+
+    body {
+        background: var(--ground);
+        color: var(--ink);
+        font-family: var(--body);
+        font-size: 16px;
+        line-height: 1.55;
+        padding-inline: 16px;
+        padding-block: 20px
+    }
+
+    .wrap {
+        max-width: 1040px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 14px
+    }
+
+    .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        font-family: var(--mono);
+        font-size: 12.5px;
+        color: var(--muted);
+        letter-spacing: .04em
+    }
+
+    .topbar b {
+        color: var(--ink);
+        font-weight: 500
+    }
+
+    .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px
+    }
+
+    .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 0 4px var(--accent-soft)
+    }
+
+    .deck {
+        position: relative
+    }
+
+    .slide {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: clamp(22px, 4.5vw, 52px);
+        min-height: 540px;
+        display: none;
+        flex-direction: column;
+        gap: 22px
+    }
+
+    .slide.active {
+        display: flex
+    }
+
+    .eyebrow {
+        font-family: var(--mono);
+        font-size: 12px;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: var(--accent)
+    }
+
+    h1, h2 {
+        font-family: var(--display);
+        font-stretch: 112%;
+        margin: 0;
+        text-wrap: balance;
+        line-height: 1.05
+    }
+
+    h1 {
+        font-size: clamp(40px, 7vw, 78px);
+        font-weight: 800;
+        letter-spacing: -.01em
+    }
+
+    h2 {
+        font-size: clamp(28px, 4.2vw, 44px);
+        font-weight: 800
+    }
+
+    h3 {
+        margin: 0;
+        font-size: 17px;
+        font-weight: 600
+    }
+
+    p {
+        margin: 0;
+        max-width: 65ch
+    }
+
+    .lead {
+        font-size: clamp(17px, 2vw, 20px);
+        color: var(--muted);
+        max-width: 60ch
+    }
+
+    .muted {
+        color: var(--muted)
+    }
+
+    .title-slide {
+        justify-content: space-between
+    }
+
+    .title-slide .role {
+        font-family: var(--mono);
+        font-size: 14px;
+        color: var(--muted);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 20px
+    }
+
+    .meter {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        border-top: 1px solid var(--line);
+        padding-top: 18px;
+        gap: 14px
+    }
+
+    .meter div {
+        display: flex;
+        flex-direction: column;
+        gap: 2px
+    }
+
+    .meter strong {
+        font-family: var(--display);
+        font-stretch: 112%;
+        font-size: 30px;
+        font-variant-numeric: tabular-nums;
+        line-height: 1
+    }
+
+    .meter span {
+        font-size: 13px;
+        color: var(--muted)
+    }
+
+    .grid2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px 28px
+    }
+
+    .grid3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px 24px
+    }
+
+    .item {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        border-top: 2px solid var(--ink);
+        padding-top: 12px
+    }
+
+    .item p {
+        font-size: 15px;
+        color: var(--muted)
+    }
+
+    .tag {
+        display: inline-block;
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+        padding: 2px 7px;
+        border-radius: 3px;
+        white-space: nowrap
+    }
+
+    .t-work {
+        background: var(--accent-soft);
+        color: var(--accent)
+    }
+
+    .t-lab {
+        background: var(--amber-soft);
+        color: var(--amber)
+    }
+
+    .t-cert {
+        background: transparent;
+        color: var(--muted);
+        border: 1px solid var(--line)
+    }
+
+    .tablewrap {
+        overflow-x: auto
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14.5px;
+        min-width: 560px
+    }
+
+    th {
+        text-align: left;
+        font-family: var(--mono);
+        font-size: 11.5px;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        font-weight: 500;
+        padding: 0 12px 8px 0;
+        border-bottom: 1px solid var(--line)
+    }
+
+    td {
+        padding: 10px 12px 10px 0;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top
+    }
+
+    td:first-child {
+        font-weight: 600;
+        width: 30%
+    }
+
+    td:last-child {
+        width: 1%;
+        white-space: nowrap
+    }
+
+    .legend {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        font-size: 13px;
+        color: var(--muted);
+        align-items: center
+    }
+
+    .values {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px
+    }
+
+    .values .item h3 {
+        font-family: var(--display);
+        font-stretch: 112%;
+        font-size: 22px;
+        font-weight: 800
+    }
+
+    .plan {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0;
+        border: 1px solid var(--line);
+        border-radius: 4px
+    }
+
+    .plan div {
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px
+    }
+
+    .plan div + div {
+        border-left: 1px solid var(--line)
+    }
+
+    .plan .when {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--accent);
+        letter-spacing: .06em
+    }
+
+    .plan ul {
+        margin: 0;
+        padding-left: 18px;
+        font-size: 14.5px;
+        color: var(--muted);
+        display: flex;
+        flex-direction: column;
+        gap: 4px
+    }
+
+    .close-slide {
+        justify-content: center
+    }
+
+    .reasons {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        max-width: 62ch
+    }
+
+    .reasons li {
+        display: grid;
+        grid-template-columns: 28px 1fr;
+        gap: 10px;
+        font-size: 17px
+    }
+
+    .reasons li span {
+        font-family: var(--mono);
+        color: var(--accent);
+        font-size: 14px;
+        padding-top: 3px
+    }
+
+    .contact {
+        font-family: var(--mono);
+        font-size: 14px;
+        display: flex;
+        gap: 8px 24px;
+        flex-wrap: wrap;
+        color: var(--muted);
+        border-top: 1px solid var(--line);
+        padding-top: 16px
+    }
+
+    .contact b {
+        color: var(--ink);
+        font-weight: 500;
+        user-select: all
+    }
+
+    .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px
+    }
+
+    .nav button {
+        font: 500 14px var(--body);
+        background: var(--panel);
+        color: var(--ink);
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 9px 16px;
+        cursor: pointer
+    }
+
+    .nav button:hover {
+        border-color: var(--accent);
+        color: var(--accent)
+    }
+
+    .nav button:focus-visible, .pips button:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px
+    }
+
+    .nav button:disabled {
+        opacity: .4;
+        cursor: default;
+        border-color: var(--line);
+        color: var(--ink)
+    }
+
+    .pips {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        justify-content: center
+    }
+
+    .pips button {
+        width: 26px;
+        height: 6px;
+        border: 0;
+        border-radius: 3px;
+        background: var(--line);
+        cursor: pointer;
+        padding: 0
+    }
+
+    .pips button[aria-current="true"] {
+        background: var(--accent)
+    }
+
+    .count {
+        font-family: var(--mono);
+        font-size: 12.5px;
+        color: var(--muted);
+        font-variant-numeric: tabular-nums;
+        text-align: center
+    }
+
+    @media (max-width: 760px) {
+        .slide {
+            display: flex;
+            min-height: 0
+        }
+
+        .nav, .count {
+            display: none
+        }
+
+        .deck {
+            display: flex;
+            flex-direction: column;
+            gap: 14px
+        }
+
+        .grid2, .grid3, .values {
+            grid-template-columns: 1fr
+        }
+
+        .meter {
+            grid-template-columns: repeat(2, 1fr)
+        }
+
+        .plan {
+            grid-template-columns: 1fr
+        }
+
+        .plan div + div {
+            border-left: 0;
+            border-top: 1px solid var(--line)
+        }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        .slide.active {
+            animation: in .35s ease-out
+        }
+
+        @keyframes in {
+            from {
+                transform:translateY(6px)
+            }
+
+            to {
+                transform: none
+            }
+        }
+    }
+    </style>
+</head>
+<body>
+
+    <div class="wrap">
+        <div class="topbar">
+            <span class="status">
+                <span class="dot"></span>
+                <b>Candidate: Adam Mustafa</b>
+            </span>
+        </div>
+
+        <div class="deck" id="deck">
+
+            <section class="slide title-slide active" aria-label="Slide 1: Title">
+                <div class="eyebrow">Application · ESG Cloud and Technical Services</div>
+                <div style="display:flex;flex-direction:column;gap:18px">
+                    <h1>Why I'm the right hire for Cloud Support Engineer</h1>
+                    <p class="lead">A 2nd line support engineer who already works to SLAs every day, has run AWS cloud platforms in production, and builds datacentre-style infrastructure at home to keep learning.</p>
+                    <div class="role">
+                        <span>Adam Mustafa</span>
+                        <span>Blackburn, Lancashire</span>
+                        <span>PGDip Computer Science</span>
+                    </div>
+                </div>
+                <div class="meter">
+                    <div>
+                        <strong>250</strong>
+                        <span>tickets a day across my service desk team</span>
+                    </div>
+                    <div>
+                        <strong>30 min</strong>
+                        <span>first-response SLA I work to</span>
+                    </div>
+                    <div>
+                        <strong>95%</strong>
+                        <span>resolution-within-target standard</span>
+                    </div>
+                    <div>
+                        <strong>10+</strong>
+                        <span>VMs and containers in my Proxmox lab</span>
+                    </div>
+                    <div>
+                        <strong>3</strong>
+                        <span>Microsoft certs: AZ-900, SC-900, SC-300</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="slide" aria-label="Slide 2: Job match">
+                <div class="eyebrow">Your requirements, my evidence</div>
+                <h2>How I match the job description</h2>
+                <div class="legend">
+                    <span class="tag t-work">Work</span>
+                     day-job experience 
+                    <span class="tag t-lab">Lab</span>
+                     hands-on home or cloud lab 
+                    <span class="tag t-cert">Cert</span>
+                     certified
+                </div>
+                <div class="tablewrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>You asked for</th>
+                                <th>What I bring</th>
+                                <th>Source</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Windows and Linux server support at 2nd line</td>
+                                <td>Own escalated incidents across Windows, Active Directory, Entra ID and Intune at EG OTM. Run Windows Server and Linux VMs in my lab.</td>
+                                <td>
+                                    <span class="tag t-work">Work</span>
+                                    <span class="tag t-lab">Lab</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Private and public cloud (AWS, Azure)</td>
+                                <td>Built and ran AWS and Databricks data platforms at CHEP. Deploy Azure VMs, VNets, NSGs and RBAC in my Azure lab.</td>
+                                <td>
+                                    <span class="tag t-work">Work</span>
+                                    <span class="tag t-lab">Lab</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Virtualisation (VMware, Nutanix or equivalent)</td>
+                                <td>Proxmox VE lab with KVM VMs, LXC containers, snapshots and VLAN segmentation.</td>
+                                <td>
+                                    <span class="tag t-lab">Lab</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Incident management, ticketing and SLAs</td>
+                                <td>Autotask and ServiceNow in a team handling about 250 tickets a day against a 30-minute response SLA.</td>
+                                <td>
+                                    <span class="tag t-work">Work</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Monitoring and centralised patching</td>
+                                <td>Datto RMM alerting and patching at work. Azure Monitor, Log Analytics, Prometheus and Grafana in labs.</td>
+                                <td>
+                                    <span class="tag t-work">Work</span>
+                                    <span class="tag t-lab">Lab</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Automation, IaC and scripting</td>
+                                <td>Python automation at CHEP. Terraform, Ansible and PowerShell for repeatable lab builds and routine tasks.</td>
+                                <td>
+                                    <span class="tag t-work">Work</span>
+                                    <span class="tag t-lab">Lab</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ITIL change, incident and problem</td>
+                                <td>Prepare, test and communicate planned changes. Spot recurring incidents and propose permanent fixes.</td>
+                                <td>
+                                    <span class="tag t-work">Work</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Degree in a computer or IT discipline</td>
+                                <td>Postgraduate Diploma in Computer Science, University of Birmingham (Merit).</td>
+                                <td>
+                                    <span class="tag t-cert">Cert</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="slide" aria-label="Slide 3: Operational support">
+                <div class="eyebrow">Now · EG OTM · Nov 2025 to present</div>
+                <h2>I already do the operational half of this role</h2>
+                <p class="lead">Day to day I work in a managed service environment much like the one ESG runs for its customers: many sites, strict SLAs and change control.</p>
+                <div class="grid2">
+                    <div class="item">
+                        <h3>Incidents to SLA</h3>
+                        <p>1st and 2nd line support to a 30-minute first response and a 95% resolution-within-target standard, logged in Autotask.</p>
+                    </div>
+                    <div class="item">
+                        <h3>Escalations handled properly</h3>
+                        <p>I gather evidence methodically, fix the root cause where I can, and hand senior engineers and vendors a clean, documented escalation when I can't.</p>
+                    </div>
+                    <div class="item">
+                        <h3>Network and connectivity</h3>
+                        <p>DNS, DHCP, TCP/IP, VPN and site connectivity faults across multi-site customers, working with ISPs and network providers.</p>
+                    </div>
+                    <div class="item">
+                        <h3>Monitoring and patching</h3>
+                        <p>Datto RMM alerts and patch deployment, acting on device health warnings before they become incidents.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="slide" aria-label="Slide 4: Cloud experience">
+                <div class="eyebrow">Cloud · CHEP and Azure lab</div>
+                <h2>I've run cloud platforms in production</h2>
+                <p class="lead">At CHEP (Feb 2024 to May 2025) I engineered and supported an AWS data platform that enterprise reporting depended on. I keep my Azure skills current through lab builds and certifications.</p>
+                <div class="grid3">
+                    <div class="item">
+                        <h3>AWS and Databricks</h3>
+                        <p>Built and maintained cloud data platform infrastructure, improving reliability and data availability.</p>
+                    </div>
+                    <div class="item">
+                        <h3>Keeping it running</h3>
+                        <p>Monitored Airflow pipelines, resolved job failures and optimised workloads to cut compute costs.</p>
+                    </div>
+                    <div class="item">
+                        <h3>Azure infrastructure</h3>
+                        <p>VMs, VNets, subnets, NSGs and RBAC, with Azure Monitor and Log Analytics alerting on performance and security events.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="slide" aria-label="Slide 5: Home lab">
+                <div class="eyebrow">Datacentre skills · Hands-on lab</div>
+                <h2>I build a small datacentre at home to learn how it all fits together</h2>
+                <div class="grid2">
+                    <div class="item">
+                        <h3>Proxmox virtualisation</h3>
+                        <p>10+ VMs and LXC containers running Windows Server and Linux, with snapshots used to test changes before applying them.</p>
+                    </div>
+                    <div class="item">
+                        <h3>Network and security</h3>
+                        <p>VLAN segmentation, UniFi firewall rules, DNS filtering and Tailscale VPN for secure remote access.</p>
+                    </div>
+                    <div class="item">
+                        <h3>Infrastructure as code</h3>
+                        <p>Linux VMs provisioned with Terraform and configured with Ansible, so builds are repeatable and documented in Git.</p>
+                    </div>
+                    <div class="item">
+                        <h3>Automation and visibility</h3>
+                        <p>PowerShell for AD provisioning and health checks, and Prometheus with Grafana for monitoring.</p>
+                    </div>
+                </div>
+                <p class="muted">These map directly onto ESG's private datacentre side: virtualised platforms, network devices, patching and automated deployment.</p>
+            </section>
+
+            <section class="slide" aria-label="Slide 6: ESG values">
+                <div class="eyebrow">Fit · ESG values</div>
+                <h2>How I work matches how ESG works</h2>
+                <div class="values">
+                    <div class="item">
+                        <h3>Excellence</h3>
+                        <p>I own a ticket until it is properly fixed, and I document it so the next engineer can pick it up.</p>
+                    </div>
+                    <div class="item">
+                        <h3>Passion</h3>
+                        <p>I spend my own time building labs and earning certifications because I enjoy infrastructure work.</p>
+                    </div>
+                    <div class="item">
+                        <h3>Integrity</h3>
+                        <p>I test changes before I make them, and I'm open about what I know and what I'm still learning.</p>
+                    </div>
+                    <div class="item">
+                        <h3>Collaboration</h3>
+                        <p>At CHEP I ran workshops with operations, finance and commercial teams. Now I work with vendors and ISPs every week.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="slide" aria-label="Slide 7: First 90 days">
+                <div class="eyebrow">Plan · First 90 days</div>
+                <h2>How I'd get up to speed fast</h2>
+                <div class="plan">
+                    <div>
+                        <span class="when">Days 1 to 30</span>
+                        <h3>Learn the estate</h3>
+                        <ul>
+                            <li>Full-time office training with the team</li>
+                            <li>Learn ESG's product suite and customer environments</li>
+                            <li>Shadow the on-call rota and change process</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <span class="when">Days 31 to 60</span>
+                        <h3>Take ownership</h3>
+                        <ul>
+                            <li>Handle incidents and patching independently</li>
+                            <li>Join the on-call rota</li>
+                            <li>Improve runbooks and build records as I go</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <span class="when">Days 61 to 90</span>
+                        <h3>Add value</h3>
+                        <ul>
+                            <li>Automate a repetitive task with PowerShell or Ansible</li>
+                            <li>Start ITIL 4 Foundation and AZ-800</li>
+                            <li>Build my Kubernetes and VMware knowledge</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="slide close-slide" aria-label="Slide 8: Summary">
+                <div class="eyebrow">Summary</div>
+                <h2>Why you should hire me</h2>
+                <ul class="reasons">
+                    <li>
+                        <span>01</span>
+                        I already work to SLAs and ITIL processes in a multi-site managed service environment.
+                    </li>
+                    <li>
+                        <span>02</span>
+                        I've supported cloud infrastructure in production on AWS and keep building on Azure.
+                    </li>
+                    <li>
+                        <span>03</span>
+                        My home lab gives me hands-on virtualisation, networking, IaC and monitoring skills.
+                    </li>
+                    <li>
+                        <span>04</span>
+                        I'm certified in Azure fundamentals, security and identity, and I'm still learning.
+                    </li>
+                    <li>
+                        <span>05</span>
+                        I'm happy with the shift pattern, on-call and in-office training.
+                    </li>
+                </ul>
+            </section>
+
+        </div>
+
+        <div class="nav">
+            <button id="prev" type="button">← Previous</button>
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+                <div class="pips" id="pips"></div>
+                <div class="count" id="count">1 / 8</div>
+            </div>
+            <button id="next" type="button">Next →</button>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        const slides = [...document.querySelectorAll('.slide')];
+        const pips = document.getElementById('pips');
+        const prev = document.getElementById('prev'),
+            next = document.getElementById('next'),
+            count = document.getElementById('count');
+        let i = 0;
+        slides.forEach((s, n) => {
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.setAttribute('aria-label', 'Go to slide ' + (n + 1));
+            b.addEventListener('click', () => go(n));
+            pips.appendChild(b);
+        });
+        function go(n) {
+            i = Math.max(0, Math.min(slides.length - 1, n));
+            slides.forEach((s, k) => s.classList.toggle('active', k === i));
+            [...pips.children].forEach((b, k) => b.setAttribute('aria-current', k === i ? 'true' : 'false'));
+            count.textContent = (i + 1) + ' / ' + slides.length;
+            prev.disabled = i === 0;
+            next.disabled = i === slides.length - 1;
+        }
+        prev.addEventListener('click', () => go(i - 1));
+        next.addEventListener('click', () => go(i + 1));
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+                e.preventDefault();
+                go(i + 1)
+            }
+            if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                e.preventDefault();
+                go(i - 1)
+            }
+        });
+        go(0);
+    })();
+    </script>
+</body>
+</html>
