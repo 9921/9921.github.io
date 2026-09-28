@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Adam Mustafa for Markel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,600;112,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+    <style>
+    :root {
+        --ground: #F0EFF4;
+        --panel: #FFFFFF;
+        --ink: #1B1A2B;
+        --muted: #5C5A6E;
+        --line: #DAD8E3;
+        --accent: #4B3BA6;
+        --accent-soft: #E6E2F6;
+        --amber: #B86E00;
+        --amber-soft: #F6E6CC;
+        --display: "Archivo", "Arial Narrow", Arial, sans-serif;
+        --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+        --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+            color-scheme: dark;
+            --ground: #14131D;
+            --panel: #1D1C29;
+            --ink: #ECEBF3;
+            --muted: #A4A1B8;
+            --line: #35334A;
+            --accent: #A99CF0;
+            --accent-soft: #2A2450;
+            --amber: #F2B155;
+            --amber-soft: #3A2C16;
+        }
+    }
+
+    :root[data-theme="dark"] {
+        color-scheme: dark;
+        --ground: #14131D;
+        --panel: #1D1C29;
+        --ink: #ECEBF3;
+        --muted: #A4A1B8;
+        --line: #35334A;
+        --accent: #A99CF0;
+        --accent-soft: #2A2450;
+        --amber: #F2B155;
+        --amber-soft: #3A2C16;
+    }
+
+    * {
+        box-sizing: border-box
+    }
+
+    html, body {
+        margin: 0
+    }
+
+    body {
+        background: var(--ground);
+        color: var(--ink);
+        font-family: var(--body);
+        font-size: 16px;
+        line-height: 1.55;
+        padding-inline: 16px;
+        padding-block: 20px
+    }
+
+    .wrap {
+        max-width: 1040px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 14px
+    }
+
+    .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        font-family: var(--mono);
+        font-size: 12.5px;
+        color: var(--muted);
+        letter-spacing: .04em
+    }
+
+    .topbar b {
+        color: var(--ink);
+        font-weight: 500
+    }
+
+    .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px
+    }
+
+    .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 0 4px var(--accent-soft)
+    }
+
+    .deck {
+        position: relative
+    }
+
+    .slide {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: clamp(22px, 4.5vw, 52px);
+        min-height: 540px;
+        display: none;
+        flex-direction: column;
+        gap: 22px
+    }
+
+    .slide.active {
+        display: flex
+    }
+
+    .eyebrow {
+        font-family: var(--mono);
+        font-size: 12px;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: var(--accent)
+    }
+
+    h1, h2 {
+        font-family: var(--display);
+        font-stretch: 112%;
+        margin: 0;
+        text-wrap: balance;
+        line-height: 1.05
+    }
+
+    h1 {
+        font-size: clamp(40px, 7vw, 78px);
+        font-weight: 800;
+        letter-spacing: -.01em
+    }
+
+    h2 {
+        font-size: clamp(28px, 4.2vw, 44px);
+        font-weight: 800
+    }
+
+    h3 {
+        margin: 0;
+        font-size: 17px;
+        font-weight: 600
+    }
+
+    p {
+        margin: 0;
+        max-width: 65ch
+    }
+
+    .lead {
+        font-size: clamp(17px, 2vw, 20px);
+        color: var(--muted);
+        max-width: 60ch
+    }
+
+    .muted {
+        color: var(--muted)
+    }
+
+    .title-slide {
+        justify-content: space-between
+    }
+
+    .title-slide .role {
+        font-family: var(--mono);
+        font-size: 14px;
+        color: var(--muted);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 20px
+    }
+
+    .meter {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        border-top: 1px solid var(--line);
+        padding-top: 18px;
+        gap: 14px
+    }
+
+    .meter div {
+        display: flex;
+        flex-direction: column;
+        gap: 2px
+    }
+
+    .meter strong {
+        font-family: var(--display);
+        font-stretch: 112%;
+        font-size: 30px;
+        font-variant-numeric: tabular-nums;
+        line-height: 1
+    }
+
+    .meter span {
+        font-size: 13px;
+        color: var(--muted)
+    }
+
+    .grid2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px 28px
+    }
+
+    .grid3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px 24px
+    }
+
+    .item {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        border-top: 2px solid var(--ink);
+        padding-top: 12px
+    }
+
+    .item p {
+        font-size: 15px;
+        color: var(--muted)
+    }
+
+    .tag {
+        display: inline-block;
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+        padding: 2px 7px;
+        border-radius: 3px;
+        white-space: nowrap
+    }
+
+    .t-work {
+        background: var(--accent-soft);
+        color: var(--accent)
+    }
+
+    .t-lab {
+        background: var(--amber-soft);
+        color: var(--amber)
+    }
+
+    .t-learn {
+        background: transparent;
+        color: var(--muted);
+        border: 1px dashed var(--muted)
+    }
+
+    .t-cert {
+        background: transparent;
+        color: var(--muted);
+        border: 1px solid var(--line)
+    }
+
+    .tablewrap {
+        overflow-x: auto
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14.5px;
+        min-width: 560px
+    }
+
+    th {
+        text-align: left;
+        font-family: var(--mono);
+        font-size: 11.5px;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        font-weight: 500;
+        padding: 0 12px 8px 0;
+        border-bottom: 1px solid var(--line)
+    }
+
+    td {
+        padding: 10px 12px 10px 0;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top
+    }
+
+    td:first-child {
+        font-weight: 600;
+        width: 30%
+    }
+
+    td:last-child {
+        width: 1%;
+        white-space: nowrap
+    }
+
+    .legend {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        font-size: 13px;
+        color: var(--muted);
+        align-items: center
+    }
+
+    .values {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px
+    }
+
+    .values .item h3 {
+        font-family: var(--display);
+        font-stretch: 112%;
+        font-size: 22px;
+        font-weight: 800
+    }
+
+    .plan {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0;
+        border: 1px solid var(--line);
+        border-radius: 4px
+    }
+
+    .plan div {
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px
+    }
+
+    .plan div + div {
+        border-left: 1px solid var(--line)
+    }
+
+    .plan .when {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--accent);
+        letter-spacing: .06em
+    }
+
+    .plan ul {
+        margin: 0;
+        padding-left: 18px;
+        font-size: 14.5px;
+        color: var(--muted);
+        display: flex;
+        flex-direction: column;
+        gap: 4px
+    }
+
+    .close-slide {
+        justify-content: center
+    }
+
+    .reasons {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        max-width: 62ch
+    }
+
+    .reasons li {
+        display: grid;
+        grid-template-columns: 28px 1fr;
+        gap: 10px;
+        font-size: 17px
+    }
+
+    .reasons li span {
+        font-family: var(--mono);
+        color: var(--accent);
+        font-size: 14px;
+        padding-top: 3px
+    }
+
+    .contact {
+        font-family: var(--mono);
+        font-size: 14px;
+        display: flex;
+        gap: 8px 24px;
+        flex-wrap: wrap;
+        color: var(--muted);
+        border-top: 1px solid var(--line);
+        padding-top: 16px
+    }
+
+    .contact b {
+        color: var(--ink);
+        font-weight: 500;
+        user-select: all
+    }
+
+    .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px
+    }
+
+    .nav button {
+        font: 500 14px var(--body);
+        background: var(--panel);
+        color: var(--ink);
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 9px 16px;
+        cursor: pointer
+    }
+
+    .nav button:hover {
+        border-color: var(--accent);
+        color: var(--accent)
+    }
+
+    .nav button:focus-visible, .pips button:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px
+    }
+
+    .nav button:disabled {
+        opacity: .4;
+        cursor: default;
+        border-color: var(--line);
+        color: var(--ink)
+    }
+
+    .pips {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        justify-content: center
+    }
+
+    .pips button {
+        width: 26px;
+        height: 6px;
+        border: 0;
+        border-radius: 3px;
+        background: var(--line);
+        cursor: pointer;
+        padding: 0
+    }
+
+    .pips button[aria-current="true"] {
+        background: var(--accent)
+    }
+
+    .count {
+        font-family: var(--mono);
+        font-size: 12.5px;
+        color: var(--muted);
+        font-variant-numeric: tabular-nums;
+        text-align: center
+    }
+
+    @media (max-width: 760px) {
+        .slide {
+            display: flex;
+            min-height: 0
+        }
+
+        .nav, .count {
+            display: none
+        }
+
+        .deck {
+            display: flex;
+            flex-direction: column;
+            gap: 14px
+        }
+
+        .grid2, .grid3, .values {
+            grid-template-columns: 1fr
+        }
+
+        .meter {
+            grid-template-columns: repeat(2, 1fr)
+        }
+
+        .plan {
+            grid-template-columns: 1fr
+        }
+
+        .plan div + div {
+            border-left: 0;
+            border-top: 1px solid var(--line)
+        }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        .slide.active {
+            animation: in .35s ease-out
+        }
+
+        @keyframes in {
+            from {
+                transform:translateY(6px)
+            }
+
+            to {
+                transform: none
+            }
+        }
+    }
+    </style>
+</head>
+<body>
+
+    <div class="wrap">
+        <div class="topbar">
+            <span class="status">
+                <span class="dot"></span>
+                <b>Candidate: Adam Mustafa</b>
+            </span>
+        </div>
+
+        <div class="deck" id="deck">
+
+            <section class="slide title-slide active" aria-label="Slide 1: Title">
+                <div class="eyebrow">Application · Deskside Operations Analyst · Markel</div>
+                <div style="display:flex;flex-direction:column;gap:18px">
+                    <h1>Ready to step up from the service desk to deskside</h1>
+                    <p class="lead">A 2nd line analyst who already handles escalated Windows, Intune and network issues every day, with seven years of face-to-face customer service behind him.</p>
+                </div>
+                <div class="meter">
+                    <div>
+                        <strong>250</strong>
+                        <span>tickets a day across my service desk team</span>
+                    </div>
+                    <div>
+                        <strong>30 min</strong>
+                        <span>first-response SLA I work to</span>
+                    </div>
+                    <div>
+                        <strong>95%</strong>
+                        <span>resolution-within-target standard</span>
+                    </div>
+                    <div>
+                        <strong>7 yrs</strong>
+                        <span>in-person customer service at Primark</span>
+                    </div>
+                    <div>
+                        <strong>3</strong>
+                        <span>Microsoft certs: AZ-900, SC-900, SC-300</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="slide" aria-label="Slide 2: Job match">
+                <div class="eyebrow">Your must-haves, my evidence</div>
+                <h2>How I match the role</h2>
+                <div class="legend">
+                    <span class="tag t-work">Work</span>
+                     day-job experience 
+                    <span class="tag t-lab">Lab</span>
+                     home lab 
+                    <span class="tag t-learn">Learning</span>
+                     my first focus in the role
+                </div>
+                <div class="tablewrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>You asked for</th>
+                                <th>What I bring</th>
+                                <th>Source</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Supporting end users in a larger organisation</td>
+                                <td>1st and 2nd line support for multi-site customers at EG OTM, in a team handling about 250 tickets a day.</td>
+                                <td>
+                                    <span class="tag t-work">Work</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Intune and M365 endpoint management</td>
+                                <td>Device enrolment, imaging, configuration and compliance policies in Intune, plus Entra ID and Microsoft 365 support.</td>
+                                <td>
+                                    <span class="tag t-work">Work</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Network, VPN, Wi-Fi and LAN access</td>
+                                <td>Troubleshoot DNS, DHCP, TCP/IP and VPN problems across sites. Run VLANs, IP addressing and UniFi networking in my lab.</td>
+                                <td>
+                                    <span class="tag t-work">Work</span>
+                                    <span class="tag t-lab">Lab</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ServiceNow and Jira</td>
+                                <td>Ticket triage and SLAs in Autotask and ServiceNow. Jira for tracking project work.</td>
+                                <td>
+                                    <span class="tag t-work">Work</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Office hardware and PC repair</td>
+                                <td>Diagnose and fix laptops, desktops and tablets, and support hardware rollouts.</td>
+                                <td>
+                                    <span class="tag t-work">Work</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Communication and customer service</td>
+                                <td>Seven years face to face with customers at Primark. Now I explain fixes to users and write knowledge base articles.</td>
+                                <td>
+                                    <span class="tag t-work">Work</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Vendors, ITIL and documentation</td>
+                                <td>Work with ISPs and vendors on incidents. Follow ITIL incident, request, change and problem processes.</td>
+                                <td>
+                                    <span class="tag t-work">Work</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Desktop virtualisation (advantageous)</td>
+                                <td>Proxmox lab with 10+ Windows and Linux VMs and containers.</td>
+                                <td>
+                                    <span class="tag t-lab">Lab</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>macOS, WebEx and AV meeting rooms</td>
+                                <td>Ready to learn your setup quickly, building on my Windows and Microsoft 365 experience.</td>
+                                <td>
+                                    <span class="tag t-learn">Learning</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="slide" aria-label="Slide 3: Escalated support">
+                <div class="eyebrow">Now · EG OTM · Nov 2025 to present</div>
+                <h2>I already handle escalated user issues</h2>
+                <p class="lead">Priority support for escalations is the core of this role, and it's what I do every day on the service desk.</p>
+                <div class="grid2">
+                    <div class="item">
+                        <h3>Triage and assignment</h3>
+                        <p>I gather the details from the user, find the root cause, and either fix it or route it to the right team with clear notes.</p>
+                    </div>
+                    <div class="item">
+                        <h3>2nd line escalations</h3>
+                        <p>Windows, Microsoft 365, Entra ID, Intune and Active Directory issues that 1st line couldn't close.</p>
+                    </div>
+                    <div class="item">
+                        <h3>Working to SLAs</h3>
+                        <p>A 30-minute first response and 95% resolution-within-target, tracked in Autotask.</p>
+                    </div>
+                    <div class="item">
+                        <h3>Fixing the cause</h3>
+                        <p>I spot recurring issues and propose permanent fixes so the same user doesn't have to call back.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="slide" aria-label="Slide 4: Hardware and endpoints">
+                <div class="eyebrow">Hands-on · Devices and endpoints</div>
+                <h2>Comfortable with the kit on the desk</h2>
+                <div class="grid3">
+                    <div class="item">
+                        <h3>Intune devices</h3>
+                        <p>Enrolment, imaging, configuration and compliance for new and existing laptops.</p>
+                    </div>
+                    <div class="item">
+                        <h3>Hardware fixes</h3>
+                        <p>Diagnosing and resolving hardware, software and OS faults across laptops, desktops and tablets.</p>
+                    </div>
+                    <div class="item">
+                        <h3>New starters and rollouts</h3>
+                        <p>Joiner/mover/leaver setup, device rollouts and upgrades, which map directly to your SOHO kit and IMAC work.</p>
+                    </div>
+                </div>
+                <p class="muted">I also give remote support with TeamViewer and RMM tools, and train users on the technology they've been given.</p>
+            </section>
+
+            <section class="slide" aria-label="Slide 5: Customer service">
+                <div class="eyebrow">Tech bar · The people side</div>
+                <h2>Seven years of face-to-face service before I moved into IT</h2>
+                <p class="lead">At Primark (2017 to 2024) I served customers in person every day in a busy city-centre store. The tech bar is the same skill in a different setting.</p>
+                <div class="grid3">
+                    <div class="item">
+                        <h3>Calm under pressure</h3>
+                        <p>Stay patient and clear with someone who's frustrated and needs help now.</p>
+                    </div>
+                    <div class="item">
+                        <h3>Plain explanations</h3>
+                        <p>Explain a fix in terms the user understands, and show them how to avoid it next time.</p>
+                    </div>
+                    <div class="item">
+                        <h3>An ambassador for IT</h3>
+                        <p>Help users get more from their technology, which is what your role asks for.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="slide" aria-label="Slide 6: Networking">
+                <div class="eyebrow">Networking · Work and home lab</div>
+                <h2>I understand the network behind the desk</h2>
+                <div class="grid2">
+                    <div class="item">
+                        <h3>At work</h3>
+                        <p>I troubleshoot DNS, DHCP, TCP/IP, VPN and site connectivity problems, and escalate to network providers with the evidence they need.</p>
+                    </div>
+                    <div class="item">
+                        <h3>In my lab</h3>
+                        <p>I run a Proxmox lab with VLAN segmentation, IP addressing, UniFi networking and firewall rules, plus Tailscale VPN for remote access.</p>
+                    </div>
+                    <div class="item">
+                        <h3>Hands and eyes</h3>
+                        <p>I can be the trusted pair of hands on site for your network, voice and collaboration teams.</p>
+                    </div>
+                    <div class="item">
+                        <h3>Certified</h3>
+                        <p>AZ-900, SC-900 and SC-300 give me a solid base in Microsoft cloud, security and identity.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="slide" aria-label="Slide 7: Markel values">
+                <div class="eyebrow">Fit · How Markel works</div>
+                <h2>Your values are how I already work</h2>
+                <div class="values">
+                    <div class="item">
+                        <h3>We win together</h3>
+                        <p>I share what I learn in knowledge base articles so the whole team resolves issues faster.</p>
+                    </div>
+                    <div class="item">
+                        <h3>We strive for better</h3>
+                        <p>I earned three Microsoft certifications this year and keep building in my home lab.</p>
+                    </div>
+                    <div class="item">
+                        <h3>We think further</h3>
+                        <p>I look past the single ticket to the recurring problem behind it.</p>
+                    </div>
+                    <div class="item">
+                        <h3>We're all about people</h3>
+                        <p>Years of customer-facing work taught me that the user's experience is what counts.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="slide" aria-label="Slide 8: First 90 days">
+                <div class="eyebrow">Plan · First 90 days</div>
+                <h2>How I'd get up to speed fast</h2>
+                <div class="plan">
+                    <div>
+                        <span class="when">Days 1 to 30</span>
+                        <h3>Learn the estate</h3>
+                        <ul>
+                            <li>Shadow the team at the tech bar</li>
+                            <li>Learn your ServiceNow workflows and escalation paths</li>
+                            <li>Get hands-on with Microsoft Managed Desktop</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <span class="when">Days 31 to 60</span>
+                        <h3>Fill the gaps</h3>
+                        <ul>
+                            <li>Build confidence with macOS support</li>
+                            <li>Learn WebEx and the meeting-room AV setup</li>
+                            <li>Handle escalations and IMAC requests on my own</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <span class="when">Days 61 to 90</span>
+                        <h3>Add value</h3>
+                        <ul>
+                            <li>Join the on-call rota and cover other offices</li>
+                            <li>Add knowledge base articles for common issues</li>
+                            <li>Start ITIL 4 Foundation</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="slide close-slide" aria-label="Slide 9: Summary">
+                <div class="eyebrow">Summary</div>
+                <h2>Why you should hire me</h2>
+                <ul class="reasons">
+                    <li>
+                        <span>01</span>
+                        I already resolve escalated Windows, Intune and M365 issues against tight SLAs.
+                    </li>
+                    <li>
+                        <span>02</span>
+                        I troubleshoot network, VPN and LAN problems at work and in my own lab.
+                    </li>
+                    <li>
+                        <span>03</span>
+                        Seven years of face-to-face customer service make me a natural fit for the tech bar.
+                    </li>
+                    <li>
+                        <span>04</span>
+                        I use ServiceNow and Jira, and I document what I fix.
+                    </li>
+                    <li>
+                        <span>05</span>
+                        I'm happy to join the on-call rota and travel between offices.
+                    </li>
+                </ul>
+            </section>
+
+        </div>
+
+        <div class="nav">
+            <button id="prev" type="button">← Previous</button>
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+                <div class="pips" id="pips"></div>
+                <div class="count" id="count">1 / 9</div>
+            </div>
+            <button id="next" type="button">Next →</button>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        const slides = [...document.querySelectorAll('.slide')];
+        const pips = document.getElementById('pips');
+        const prev = document.getElementById('prev'),
+            next = document.getElementById('next'),
+            count = document.getElementById('count');
+        let i = 0;
+        slides.forEach((s, n) => {
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.setAttribute('aria-label', 'Go to slide ' + (n + 1));
+            b.addEventListener('click', () => go(n));
+            pips.appendChild(b);
+        });
+        function go(n) {
+            i = Math.max(0, Math.min(slides.length - 1, n));
+            slides.forEach((s, k) => s.classList.toggle('active', k === i));
+            [...pips.children].forEach((b, k) => b.setAttribute('aria-current', k === i ? 'true' : 'false'));
+            count.textContent = (i + 1) + ' / ' + slides.length;
+            prev.disabled = i === 0;
+            next.disabled = i === slides.length - 1;
+        }
+        prev.addEventListener('click', () => go(i - 1));
+        next.addEventListener('click', () => go(i + 1));
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+                e.preventDefault();
+                go(i + 1)
+            }
+            if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                e.preventDefault();
+                go(i - 1)
+            }
+        });
+        go(0);
+    })();
+    </script>
+</body>
+</html>
