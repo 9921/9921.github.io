@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="theme-color" content="#0b0f24">
+    <meta name="robots" content="noindex,nofollow">
+    <title>For Zahra</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Dancing+Script:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+    *, * ::before, * ::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0
+    }
+
+    html, body {
+        height: 100%;
+        overflow: hidden;
+        background: #0b0f24;
+        color: #f6ead9;
+        -webkit-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: transparent
+    }
+
+    body {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        position: fixed;
+        inset: 0;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation
+    }
+
+    .script {
+        font-family: "Dancing Script", "Snell Roundhand", "Brush Script MT", cursive
+    }
+
+    .sky {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, #070a1c 0%, #121a3f 45%, #2a2a55 68%, #4a3a5c 72%)
+    }
+
+    .star {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        border-radius: 50%;
+        background: #fff;
+        animation: tw var(--t) ease-in-out infinite
+    }
+
+    @keyframes tw {
+        50% {
+            opacity: .25
+        }
+    }
+
+    .moon {
+        position: absolute;
+        right: 14%;
+        top: 34%;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 40% 40%, #fffaf0, #efe2c8 70%);
+        box-shadow: 0 0 40px 10px rgba(255, 240, 210, .18)
+    }
+
+    .water {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 30%;
+        background: linear-gradient(180deg, #2c2a4c 0%, #151a36 40%, #090c1e 100%);
+        overflow: hidden
+    }
+
+    .water::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(180deg, rgba(255, 255, 255, .05) 0 1px, transparent 1px 9px);
+        animation: shim 6s linear infinite
+    }
+
+    @keyframes shim {
+        to {
+            transform: translateY(9px)
+        }
+    }
+
+    .moonpath {
+        position: absolute;
+        right: calc(16% + 8px);
+        top: 0;
+        width: 30px;
+        height: 100%;
+        background: linear-gradient(rgba(255, 240, 210, .35), transparent);
+        filter: blur(6px)
+    }
+
+    .lantern {
+        position: absolute;
+        width: var(--w);
+        height: calc(var(--w) * 1.3);
+        margin-left: calc(var(--w) /-2);
+        will-change: transform;
+        cursor: pointer
+    }
+
+    .lantern .body {
+        position: absolute;
+        inset: 0;
+        clip-path: polygon(0 0, 100% 0, 84% 100%, 16% 100%);
+        -webkit-clip-path: polygon(0 0, 100% 0, 84% 100%, 16% 100%);
+        background: linear-gradient(180deg, #e9a46a, #c96a3c 70%, #8f4224);
+        transition: background 1.2s ease
+    }
+
+    .lantern .glow {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: calc(var(--w) * 4);
+        height: calc(var(--w) * 4);
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255, 190, 100, .55), rgba(255, 140, 60, .15) 40%, transparent 70%);
+        opacity: 0;
+        transition: opacity 1.4s ease;
+        pointer-events: none
+    }
+
+    .lantern.lit .body {
+        background: radial-gradient(ellipse at 50% 85%, #fff6d8 0%, #ffd38a 30%, #ff9d4d 70%, #d9622e 100%)
+    }
+
+    .lantern.lit .glow {
+        opacity: 1;
+        animation: pul 2.2s ease-in-out infinite
+    }
+
+    @keyframes pul {
+        50% {
+            opacity: .75
+        }
+    }
+
+    .lantern .rib {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: rgba(120, 50, 20, .35)
+    }
+
+    .refl {
+        position: absolute;
+        width: var(--w);
+        height: calc(var(--w) * 1.3);
+        margin-left: calc(var(--w) /-2);
+        border-radius: 40%;
+        filter: blur(8px);
+        opacity: 0;
+        background: radial-gradient(ellipse, rgba(255, 190, 110, .75), transparent 70%);
+        pointer-events: none
+    }
+
+    .msg {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: calc(10vh + env(safe-area-inset-top));
+        text-align: center;
+        padding: 0 8vw;
+        z-index: 5;
+        pointer-events: none
+    }
+
+    .msg p {
+        font-size: clamp(26px, 7.4vw, 36px);
+        line-height: 1.35;
+        color: #fff1e2;
+        text-shadow: 0 2px 16px rgba(0, 0, 0, .6);
+        opacity: 0;
+        transition: opacity 1.6s ease
+    }
+
+    .msg p.show {
+        opacity: 1
+    }
+
+    .msg .s {
+        font-size: clamp(28px, 8vw, 38px);
+        margin-top: 14px
+    }
+
+    .hint {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: calc(4vh + env(safe-area-inset-bottom));
+        text-align: center;
+        font-size: 12px;
+        letter-spacing: .3em;
+        text-transform: uppercase;
+        opacity: .65;
+        z-index: 5;
+        transition: opacity .8s
+    }
+
+    .again {
+        position: absolute;
+        left: 50%;
+        bottom: calc(4vh + env(safe-area-inset-bottom));
+        transform: translateX(-50%);
+        z-index: 6;
+        font: inherit;
+        font-size: 17px;
+        letter-spacing: .1em;
+        color: #fff4e6;
+        background: rgba(255, 160, 90, .18);
+        border: 1px solid rgba(255, 200, 150, .45);
+        border-radius: 999px;
+        padding: 11px 22px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 1.2s;
+        cursor: pointer;
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px)
+    }
+
+    .again.show {
+        opacity: 1;
+        pointer-events: auto
+    }
+    </style>
+</head>
+<body>
+    <div class="sky" id="sky">
+        <div class="moon"></div>
+    </div>
+    <div class="water">
+        <div class="moonpath"></div>
+    </div>
+    <div class="msg">
+        <p id="m1">Tap the lantern to light it.</p>
+        <p id="m2" style="margin-top:14px">We never got the chance to light a lantern together, so this is our chance now.</p>
+    </div>
+    <div class="msg" style="top:auto;bottom:calc(14vh + env(safe-area-inset-bottom))">
+        <p id="m3" style="font-size:clamp(22px,6.1vw,30px)">
+            Like this lantern, I&rsquo;m always here for you.
+            <br>
+            Day and night, anytime.
+            <br>
+            I&rsquo;m here to help and support you.
+            <br>
+            I always have, and I always will.
+        </p>
+        <p id="m4" class="s script">Adam</p>
+    </div>
+    <div class="hint" id="hint">tap the lantern</div>
+    <button class="again" id="again">Light another</button>
+    <script>
+    (function() {
+        var sky = document.getElementById("sky");
+        for (var i = 0; i < 90; i++) {
+            var s = document.createElement("span");
+            s.className = "star";
+            s.style.left = Math.random() * 100 + "%";
+            s.style.top = Math.random() * 66 + "%";
+            s.style.opacity = .3 + Math.random() * .7;
+            s.style.setProperty("--t", (2 + Math.random() * 4) + "s");
+            sky.appendChild(s)
+        }
+        var $ = function(id) {
+                return document.getElementById(id)
+            },
+            first = true,
+            busy = false;
+        setTimeout(function() {
+            $("m1").classList.add("show")
+        }, 500);
+        function make() {
+            var W = Math.min(innerWidth * .16, 70),
+                L = document.createElement("div");
+            L.className = "lantern";
+            L.style.setProperty("--w", W + "px");
+            L.innerHTML = '<div class="glow"></div><div class="body"></div><div class="rib" style="left:33%"></div><div class="rib" style="left:66%"></div>';
+            var R = document.createElement("div");
+            R.className = "refl";
+            R.style.setProperty("--w", W + "px");
+            document.body.appendChild(R);
+            document.body.appendChild(L);
+            var x = innerWidth * (first ? .5 : .3 + Math.random() * .4),
+                waterY = innerHeight * .70,
+                y0 = waterY - W * 1.3 - 4;
+            L.style.left = x + "px";
+            L.style.top = "0px";
+            L.style.transform = "translateY(" + y0 + "px)";
+            R.style.left = x + "px";
+            R.style.top = "0px";
+            R.style.transform = "translateY(" + (waterY + 6) + "px)";
+            L.addEventListener("click", function() {
+                if (L.classList.contains("lit") || busy)
+                    return;
+                light(L, R, x, y0, waterY, W)
+            });
+            return L;
+        }
+        function light(L, R, x, y0, waterY, W) {
+            busy = true;
+            L.classList.add("lit");
+            R.style.transition = "opacity 1.4s";
+            R.style.opacity = .8;
+            $("hint").style.opacity = 0;
+            if (first) {
+                $("m1").classList.remove("show");
+                setTimeout(function() {
+                    $("m2").classList.add("show")
+                }, 900)
+            }
+            var dur = 16000,
+                t0 = null,
+                phase = Math.random() * 6,
+                endScale = .18 + Math.random() * .12,
+                endX = x + (Math.random() * .3 - .15) * innerWidth,
+                endY = innerHeight * (.08 + Math.random() * .32);
+            setTimeout(function() {
+                function step(ts) {
+                    if (!t0)
+                        t0 = ts;
+                    var p = Math.min(1, (ts - t0) / dur),
+                        e = 1 - Math.pow(1 - p, 2.2);
+                    var y = y0 + (endY - y0) * e,
+                        sw = Math.sin(ts / 900 + phase) * 14 * (1 - p * .5),
+                        sc = 1 - (1 - endScale) * e,
+                        xx = x + (endX - x) * e + sw;
+                    L.style.left = xx + "px";
+                    L.style.transform = "translateY(" + y + "px) scale(" + sc + ") rotate(" + (sw * .25) + "deg)";
+                    var depth = waterY - y;
+                    R.style.left = xx + "px";
+                    R.style.transform = "translateY(" + (waterY + 6 + depth * .35) + "px) scale(" + sc + ")";
+                    R.style.opacity = Math.max(0, .8 - p * 1.4);
+                    if (first && p > .35 && !$("m3").classList.contains("show")) {
+                        $("m2").classList.remove("show");
+                        $("m3").classList.add("show");
+                        setTimeout(function() {
+                            $("m4").classList.add("show")
+                        }, 2200)
+                    }
+                    if (p < 1)
+                        requestAnimationFrame(step);
+                    else {
+                        L.style.animation = "none";
+                        busy = false;
+                        first = false;
+                        setTimeout(function() {
+                            $("again").classList.add("show")
+                        }, 600)
+                    }
+                }
+                requestAnimationFrame(step);
+            }, 1600);
+        }
+        make();
+        $("again").addEventListener("click", function() {
+            $("again").classList.remove("show");
+            var L = make();
+            setTimeout(function() {
+                L.click()
+            }, 400)
+        });
+    })();
+    </script>
+</body>
+</html>
