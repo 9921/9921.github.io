@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="theme-color" content="#fbf3ea">
+    <meta name="robots" content="noindex,nofollow">
+    <title>For Zahra</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Dancing+Script:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+    *, * ::before, * ::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0
+    }
+
+    :root {
+        --vh: 100vh;
+        --ink:#4f3a32
+    }
+
+    @supports (height: 100svh) {
+        :root {
+            --vh: 100svh
+        }
+    }
+
+    html, body {
+        -webkit-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: transparent;
+        color: var(--ink)
+    }
+
+    body {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        background: linear-gradient(180deg, #fbf3ea 0%, #f8e6d6 40%, #eef0dc 75%, #dfe8cc 100%);
+        overscroll-behavior-y: none
+    }
+
+    .script {
+        font-family: "Dancing Script", "Snell Roundhand", "Brush Script MT", cursive
+    }
+
+    .intro {
+        min-height: var(--vh);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 0 8vw
+    }
+
+    .intro .e {
+        font-size: 12px;
+        letter-spacing: .32em;
+        text-transform: uppercase;
+        opacity: .65
+    }
+
+    .intro h1 {
+        font-weight: 400;
+        font-size: clamp(42px, 12vw, 64px);
+        margin-top: 10px
+    }
+
+    .intro p {
+        margin-top: 16px;
+        font-size: clamp(20px, 5.6vw, 26px);
+        font-style: italic;
+        opacity: .8
+    }
+
+    .intro .s {
+        margin-top: 7vh;
+        font-size: 12px;
+        letter-spacing: .3em;
+        text-transform: uppercase;
+        opacity: .5;
+        animation: pulse 2.6s ease-in-out infinite
+    }
+
+    @keyframes pulse {
+        50% {
+            opacity: .2
+        }
+    }
+
+    .bed {
+        min-height: 82vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0 9vw;
+        text-align: center
+    }
+
+    .bed svg {
+        width: min(52vw, 230px);
+        height: auto;
+        overflow: visible
+    }
+
+    .bed p {
+        max-width: 420px;
+        margin-top: 2vh;
+        font-size: clamp(25px, 7vw, 34px);
+        line-height: 1.35;
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 1.2s ease 1.6s, transform 1.2s ease 1.6s
+    }
+
+    .in p {
+        opacity: 1;
+        transform: none
+    }
+
+    .stem {
+        fill: none;
+        stroke: #7d9a62;
+        stroke-width: 4;
+        stroke-linecap: round;
+        stroke-dasharray: 240;
+        stroke-dashoffset: 240;
+        transition: stroke-dashoffset 1.3s ease
+    }
+
+    .leaf {
+        fill: #8fae72;
+        transform-origin: var(--o);
+        transform: scale(0);
+        transition: transform .8s cubic-bezier(.3, 1.5, .5, 1) .7s
+    }
+
+    .pt {
+        transform-origin: 100px 110px;
+        transform: scale(0);
+        transition: transform .9s cubic-bezier(.3, 1.4, .5, 1)
+    }
+
+    .ctr {
+        transform-origin: 100px 110px;
+        transform: scale(0);
+        transition: transform .7s cubic-bezier(.3, 1.6, .5, 1) 2s
+    }
+
+    .in .stem {
+        stroke-dashoffset:0
+    }
+
+    .in .leaf, .in .pt, .in .ctr {
+        transform: scale(1)
+    }
+
+    .field {
+        min-height: var(--vh);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 0 5vw calc(8vh + env(safe-area-inset-bottom))
+    }
+
+    .row {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        width: 100%;
+        max-width: 520px;
+        margin-bottom: 5vh
+    }
+
+    .row svg {
+        width: calc(100%/7);
+        height: auto;
+        overflow: visible
+    }
+
+    .row svg:nth-child(even) {
+        margin-bottom: -14px
+    }
+
+    .field h2 {
+        font-weight: 400;
+        font-size: clamp(38px, 11vw, 56px);
+        line-height: 1.15;
+        opacity: 0;
+        transition: opacity 2s ease 2.6s
+    }
+
+    .field .sig {
+        font-size: clamp(28px, 8vw, 38px);
+        margin-top: 3vh;
+        opacity: 0;
+        transition: opacity 2s ease 3.8s
+    }
+
+    .field.in h2, .field.in .sig {
+        opacity: 1
+    }
+
+    .petal-fall {
+        position: fixed;
+        top: -5vh;
+        width: 10px;
+        height: 13px;
+        border-radius: 70% 0 70% 0;
+        pointer-events: none;
+        animation: fall var(--d) linear var(--dl) forwards;
+        opacity: .8
+    }
+
+    @keyframes fall {
+        to {
+            transform: translate(var(--dx), 110vh) rotate(540deg);
+            opacity: 0
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            transition-duration: .2s !important;
+            transition-delay: 0s !important
+        }
+    }
+    </style>
+</head>
+<body>
+    <section class="intro">
+        <div class="e">For Zahra</div>
+        <h1 class="script">Your garden</h1>
+        <p>Every flower here is something I love about you.</p>
+        <div class="s">scroll gently</div>
+    </section>
+    <div id="beds"></div>
+    <section class="field" id="field">
+        <div class="row" id="row"></div>
+        <h2 class="script">Look what you&rsquo;ve grown into.</h2>
+        <div class="sig script">Adam</div>
+    </section>
+    <script>
+    (function() {
+        var ITEMS = [
+        "Your kindness, even on the days the world isn&rsquo;t kind to you.",
+        "The way you light up a room without even trying.",
+        "How strong you are, even when you don&rsquo;t feel it.",
+        "Your laugh. I&rsquo;d know it anywhere.",
+        "Your heart, and how much you give from it.",
+        "The way you make ordinary days feel special.",
+        "How beautiful you are, inside and out."
+        ];
+        var KINDS = [// petals, rx, ry, colour, deep colour, centre
+        [6, 20, 38, "#f6b9a0", "#e5866a", "#f3c75f"], [12, 10, 36, "#fffaf2", "#efe1cf", "#f2b84b"], [5, 26, 34, "#f7c6d2", "#e48aa3", "#fff1c9"],
+        [8, 15, 40, "#ffd6a5", "#f3a65f", "#c96a3c"], [10, 13, 34, "#e9c9f0", "#c79bd8", "#ffe6a8"], [6, 22, 36, "#ffb3a0", "#e46f5a", "#ffe2b0"], [14, 9, 38, "#fde7d9", "#f2b9a0", "#e58a6c"]];
+        function flower(k, idx) {
+            var K = KINDS[k],
+                n = K[0],
+                h = '<svg viewBox="0 0 200 300" aria-hidden="true"><defs><radialGradient id="g' + idx + '" cx="50%" cy="100%" r="100%"><stop offset="0" stop-color="' + K[4] + '"/><stop offset="1" stop-color="' + K[3] + '"/></radialGradient></defs>';
+            h += '<path class="stem" d="M100 300 C 92 240, 110 190, 100 120"/>';
+            h += '<path class="leaf" style="--o:98px 230px" d="M98 230 C 70 210, 58 222, 50 236 C 70 240, 86 238, 98 230Z"/>';
+            h += '<path class="leaf" style="--o:103px 195px;transition-delay:.9s" d="M103 195 C 130 176, 144 186, 150 200 C 132 206, 116 204, 103 195Z"/>';
+            for (var i = 0; i < n; i++) {
+                var a = i * 360 / n;
+                h += '<g transform="rotate(' + a + ' 100 110)"><ellipse class="pt" style="transition-delay:' + (1.1 + i * .06) + 's" cx="100" cy="' + (110 - K[2] * .82) + '" rx="' + K[1] + '" ry="' + K[2] * .82 + '" fill="url(#g' + idx + ')"/></g>'
+            }
+            h += '<circle class="ctr" cx="100" cy="110" r="' + (n > 10 ? 13 : 11) + '" fill="' + K[5] + '"/><circle class="ctr" cx="96" cy="106" r="3.5" fill="#fff" opacity=".55"/></svg>';
+            return h;
+        }
+        var beds = document.getElementById("beds");
+        ITEMS.forEach(function(t, i) {
+            var s = document.createElement("section");
+            s.className = "bed";
+            s.innerHTML = flower(i % KINDS.length, "a" + i) + "<p>" + t + "</p>";
+            beds.appendChild(s)
+        });
+        var row = document.getElementById("row");
+        ITEMS.forEach(function(_, i) {
+            row.insertAdjacentHTML("beforeend", flower(i % KINDS.length, "b" + i))
+        });
+        var io = new IntersectionObserver(function(es) {
+            es.forEach(function(e) {
+                if (e.isIntersecting) {
+                    e.target.classList.add("in");
+                    if (e.target.id === "field") {
+                        petals();
+                        io.unobserve(e.target)
+                    }
+                }
+            })
+        }, {
+            threshold: .45
+        });
+        document.querySelectorAll(".bed,.field").forEach(function(x) {
+            io.observe(x)
+        });
+        function petals() {
+            var c = ["#f6b9a0", "#f7c6d2", "#ffd6a5", "#e9c9f0", "#fde7d9", "#ffb3a0"];
+            for (var i = 0; i < 30; i++) {
+                var p = document.createElement("span");
+                p.className = "petal-fall";
+                p.style.left = Math.random() * 100 + "vw";
+                p.style.background = c[i % c.length];
+                p.style.setProperty("--d", (5 + Math.random() * 4) + "s");
+                p.style.setProperty("--dl", (2.5 + Math.random() * 3) + "s");
+                p.style.setProperty("--dx", (Math.random() * 30 - 15) + "vw");
+                document.body.appendChild(p);
+                setTimeout(function(e) {
+                    return function() {
+                        e.remove()
+                    }
+                }(p), 15000)
+            }
+        }
+    })();
+    </script>
+</body>
+</html>
