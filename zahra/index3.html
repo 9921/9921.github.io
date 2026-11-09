@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0e0a0b">
+    <meta name="robots" content="noindex, nofollow">
+    <title>For You, Zahra</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@400;500&family=Dancing+Script:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+    *, * ::before, * ::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0
+    }
+
+    html, body {
+        background: #0e0a0b;
+        color: #f5e9df;
+        -webkit-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: transparent
+    }
+
+    body {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        min-height: 100vh;
+        overflow-x: hidden;
+        background: radial-gradient(90% 50% at 50% 0%, #3a2226 0%, #1a1012 45%, #0e0a0b 100%) fixed
+    }
+
+    .script {
+        font-family: "Dancing Script", "Snell Roundhand", "Brush Script MT", cursive
+    }
+
+    .sparkle {
+        position: fixed;
+        width: 2px;
+        height: 2px;
+        border-radius: 50%;
+        background: #ffe3cf;
+        opacity: 0;
+        pointer-events: none;
+        animation: tw var(--t) ease-in-out var(--d) infinite
+    }
+
+    @keyframes tw {
+        50% {
+            opacity: .7
+        }
+    }
+
+    .wrap {
+        position: relative;
+        max-width: 560px;
+        margin: 0 auto;
+        padding: calc(7vh + env(safe-area-inset-top)) 20px calc(8vh + env(safe-area-inset-bottom))
+    }
+
+    header {
+        text-align: center;
+        opacity: 0;
+        animation: rise 1.4s ease .2s forwards
+    }
+
+    .avatar {
+        width: 96px;
+        height: 96px;
+        margin: 0 auto 20px;
+        border-radius: 50%;
+        padding: 3px;
+        background: linear-gradient(135deg, #f2c3a2, #e07d63, #f7d9c4);
+        box-shadow: 0 0 40px rgba(224, 125, 99, .35)
+    }
+
+    .avatar img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        display: block;
+        border: 3px solid #0e0a0b;
+        background: #2a1a1c
+    }
+
+    .eyebrow {
+        font-family: Inter, system-ui, sans-serif;
+        font-size: 11px;
+        letter-spacing: .34em;
+        text-transform: uppercase;
+        color: #d9b9a5;
+        opacity: .8
+    }
+
+    h1 {
+        font-weight: 400;
+        font-size: clamp(46px, 13vw, 68px);
+        line-height: 1.05;
+        margin-top: 8px;
+        color: #ffe6d6;
+        text-shadow: 0 0 30px rgba(255, 170, 140, .25)
+    }
+
+    .sub {
+        margin: 14px auto 0;
+        max-width: 380px;
+        font-size: clamp(19px, 5.2vw, 23px);
+        font-style: italic;
+        line-height: 1.4;
+        opacity: .85
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-top: 6vh
+    }
+
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        min-height: 168px;
+        padding: 16px 15px 15px;
+        border-radius: 20px;
+        overflow: hidden;
+        text-decoration: none;
+        color: #fff6ef;
+        background: var(--bg);
+        border: 1px solid rgba(255, 255, 255, .08);
+        box-shadow: 0 10px 28px rgba(0, 0, 0, .35);
+        opacity: 0;
+        transform: translateY(18px);
+        animation: rise 1s ease forwards;
+        animation-delay: var(--dl);
+        transition: transform .25s ease, box-shadow .25s ease
+    }
+
+    .card:active {
+        transform: scale(.97)
+    }
+
+    @media (hover: hover) {
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, .45)
+        }
+    }
+
+    .card.wide {
+        grid-column: 1 / -1;
+        min-height: 150px
+    }
+
+    .card svg {
+        position: absolute;
+        top: 14px;
+        left: 15px;
+        width: 30px;
+        height: 30px;
+        fill: none;
+        stroke: #fff3ea;
+        stroke-width: 1.4;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        opacity: .9
+    }
+
+    .card::after {
+        content: "";
+        position: absolute;
+        right: -30px;
+        top: -30px;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: radial-gradient(circle, var(--glow), transparent 70%);
+        opacity: .7;
+        pointer-events: none
+    }
+
+    .card h2 {
+        position: relative;
+        font-weight: 500;
+        font-size: clamp(21px, 5.6vw, 25px);
+        line-height: 1.1
+    }
+
+    .card p {
+        position: relative;
+        margin-top: 5px;
+        font-family: Inter, system-ui, sans-serif;
+        font-size: 12px;
+        line-height: 1.45;
+        opacity: .78
+    }
+
+    footer {
+        text-align: center;
+        margin-top: 7vh;
+        opacity: 0;
+        animation: rise 1.4s ease 1.6s forwards
+    }
+
+    footer p {
+        font-size: clamp(19px, 5vw, 22px);
+        font-style: italic;
+        opacity: .8;
+        line-height: 1.4
+    }
+
+    footer .sig {
+        font-size: clamp(30px, 8.5vw, 40px);
+        margin-top: 12px;
+        color: #ffdccb;
+        font-style: normal;
+        opacity: 1
+    }
+
+    @keyframes rise {
+        to {
+            opacity: 1;
+            transform: none
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation-duration: .01s !important;
+            animation-delay: 0s !important
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <header>
+            <div class="avatar">
+                <img src="profile.jpg" alt="" onerror="this.style.visibility='hidden'">
+            </div>
+            <div class="eyebrow">A little place that&rsquo;s only yours</div>
+            <h1 class="script">For you, Zahra</h1>
+            <p class="sub">Open whichever one you need today. They&rsquo;ll always be here.</p>
+        </header>
+
+        <!-- ✏️ Each card links to a page in this same folder -->
+        <nav class="grid">
+            <a class="card wide" href="slideshow.html" style="--bg:linear-gradient(135deg,#4a2a2e,#24151a);--glow:#e07d63;--dl:.5s">
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="5" width="18" height="14" rx="2"/>
+                    <path d="m3 16 5-5 4 4 3-3 6 6"/>
+                    <circle cx="16" cy="9" r="1.5"/>
+                </svg>
+                <h2>Your moments</h2>
+                <p>The photos and videos that make you, you</p>
+            </a>
+            <a class="card" href="kite.html" style="--bg:linear-gradient(160deg,#6d8fb0,#c98a82);--glow:#ffd9c2;--dl:.6s">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2 19 9l-7 9-7-9z"/>
+                    <path d="M12 2v16M5 9h14"/>
+                    <path d="M12 18c-1 2 1 2 0 4"/>
+                </svg>
+                <h2>The kite</h2>
+                <p>Your birthday by the sea</p>
+            </a>
+            <a class="card" href="sky.html" style="--bg:linear-gradient(160deg,#1d2858,#0b1026);--glow:#b9c6ff;--dl:.7s">
+                <svg viewBox="0 0 24 24">
+                    <path d="m12 3 1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6z"/>
+                    <path d="M19 15v4M17 17h4M5 17v2M4 18h2"/>
+                </svg>
+                <h2>The night you were born</h2>
+                <p>The sky over Lahore, 15 August 2001</p>
+            </a>
+            <a class="card" href="song.html" style="--bg:linear-gradient(160deg,#e9a38c,#b86a5a);--glow:#fff1e2;--dl:.8s">
+                <svg viewBox="0 0 24 24">
+                    <path d="M9 18V6l11-2v12"/>
+                    <circle cx="6.5" cy="18" r="2.5"/>
+                    <circle cx="17.5" cy="16" r="2.5"/>
+                </svg>
+                <h2>Your song</h2>
+                <p>Your name, turned into music</p>
+            </a>
+            <a class="card" href="lantern.html" style="--bg:linear-gradient(160deg,#2a2a55,#0b0f24);--glow:#ff9d4d;--dl:1s">
+                <svg viewBox="0 0 24 24">
+                    <path d="M6 4h12l-2 13H8z"/>
+                    <path d="M10 4l-.5 13M14 4l.5 13"/>
+                    <path d="M12 19v2"/>
+                </svg>
+                <h2>Our lantern</h2>
+                <p>The one we never got to light</p>
+            </a>
+            <a class="card wide" href="garden.html" style="--bg:linear-gradient(135deg,#9db57f,#d9a38e);--glow:#fff3e6;--dl:1.1s">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="8" r="2"/>
+                    <path d="M12 6c0-3 3-3 3 0M12 6c0-3-3-3-3 0M14 8c3 0 3 3 0 3M10 8c-3 0-3 3 0 3M12 10c0 3 3 3 3 0M12 10c0 3-3 3-3 0"/>
+                    <path d="M12 12v10M12 18c-2-2-4-2-5-1M12 16c2-2 4-2 5-1"/>
+                </svg>
+                <h2>Your garden</h2>
+                <p>Everything I love about you, in bloom</p>
+            </a>
+        </nav>
+
+        <footer>
+            <p>
+                No pressure, and no need to reply.
+                <br>
+                I just wanted you to have these.
+            </p>
+            <div class="sig script">
+                I love you.
+                <br>
+                Adam
+            </div>
+        </footer>
+    </div>
+    <script>
+    for (var i = 0; i < 40; i++) {
+        var s = document.createElement("span");
+        s.className = "sparkle";
+        s.style.left = Math.random() * 100 + "vw";
+        s.style.top = Math.random() * 100 + "vh";
+        s.style.setProperty("--t", (3 + Math.random() * 4) + "s");
+        s.style.setProperty("--d", (Math.random() * 5) + "s");
+        document.body.appendChild(s)
+    }
+    </script>
+</body>
+</html>
