@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="theme-color" content="#fbefe3">
+    <meta name="robots" content="noindex,nofollow">
+    <title>For Zahra</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Dancing+Script:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+    *, * ::before, * ::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0
+    }
+
+    :root {
+        --vh: 100vh;
+        --ink: #5a3b33;
+        --coral: #e07d63;
+        --peach: #f2c3a2
+    }
+
+    @supports (height: 100svh) {
+        :root {
+            --vh: 100svh
+        }
+    }
+
+    html, body {
+        -webkit-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: transparent;
+        color: var(--ink)
+    }
+
+    body {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        overscroll-behavior-y: none;
+        background: linear-gradient(180deg, #fbefe3 0%, #f7dccb 45%, #efbfa8 80%, #e0a294 100%) fixed;
+        min-height: 100%
+    }
+
+    .script {
+        font-family: "Dancing Script", "Snell Roundhand", "Brush Script MT", cursive
+    }
+
+    .top {
+        min-height: var(--vh);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: calc(4vh + env(safe-area-inset-top)) 5vw calc(4vh + env(safe-area-inset-bottom));
+        position: relative;
+        overflow: hidden
+    }
+
+    .eyebrow {
+        font-size: 13px;
+        letter-spacing: .3em;
+        text-transform: uppercase;
+        opacity: .7
+    }
+
+    .lead {
+        font-size: clamp(22px, 6.2vw, 30px);
+        margin-top: 10px;
+        font-style: italic;
+        opacity: .85
+    }
+
+    .staff {
+        width: min(88vw, 460px);
+        height: auto;
+        margin: 5vh 0 1vh;
+        overflow: visible
+    }
+
+    .staff line {
+        stroke: var(--ink);
+        stroke-width: 1;
+        opacity: .35
+    }
+
+    .nh {
+        fill: var(--ink);
+        opacity: 0;
+        transform-box: fill-box;
+        transform-origin: center;
+        transition: opacity .5s ease, transform .5s cubic-bezier(.3, 1.6, .5, 1);
+        transform: scale(.4)
+    }
+
+    .nh.on {
+        opacity: .9;
+        transform: scale(1)
+    }
+
+    .nh.lit {
+        fill: var(--coral)
+    }
+
+    .letters {
+        display: flex;
+        gap: min(2.6vw, 14px);
+        margin-top: 3vh
+    }
+
+    .key {
+        position: relative;
+        width: min(16vw, 82px);
+        height: min(24vw, 118px);
+        border-radius: 16px;
+        border: 1px solid rgba(90, 59, 51, .15);
+        background: linear-gradient(180deg, rgba(255, 250, 244, .9), rgba(250, 232, 218, .85));
+        box-shadow: 0 6px 18px rgba(150, 80, 60, .12), inset 0 1px 0 #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        transition: transform .15s ease, box-shadow .4s ease, background .4s ease
+    }
+
+    .key .ch {
+        font-size: min(12vw, 60px);
+        line-height: 1;
+        color: var(--ink)
+    }
+
+    .key .nt {
+        font-size: 13px;
+        letter-spacing: .2em;
+        margin-top: 4px;
+        opacity: 0;
+        transition: opacity .5s
+    }
+
+    .key.seen .nt {
+        opacity: .6
+    }
+
+    .key.glow {
+        transform: translateY(-4px) scale(1.04);
+        background: linear-gradient(180deg, #fff6ee, #ffd9c2);
+        box-shadow: 0 0 0 1px rgba(224, 125, 99, .35), 0 10px 30px rgba(224, 125, 99, .45)
+    }
+
+    .key.glow .ch {
+        color: #c45f48
+    }
+
+    .float {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        font-size: 22px;
+        color: var(--coral);
+        pointer-events: none;
+        animation: up 1.8s ease-out forwards
+    }
+
+    @keyframes up {
+        from {
+            transform: translate(-50%, 0);
+            opacity:1
+        }
+
+        to {
+            transform: translate(calc(-50% + var(--dx)), -90px) rotate(var(--r));
+            opacity: 0
+        }
+    }
+
+    .hint {
+        margin-top: 3vh;
+        font-size: 13px;
+        letter-spacing: .24em;
+        text-transform: uppercase;
+        opacity: .55
+    }
+
+    .play {
+        margin-top: 4vh;
+        font: inherit;
+        font-size: 19px;
+        letter-spacing: .12em;
+        color: #fff8f2;
+        background: linear-gradient(180deg, #e58a6c, #cf6c55);
+        border: 0;
+        border-radius: 999px;
+        padding: 15px 30px;
+        box-shadow: 0 10px 26px rgba(207, 108, 85, .35);
+        cursor: pointer;
+        touch-action: manipulation;
+        transition: transform .15s, opacity .4s
+    }
+
+    .play:active {
+        transform: scale(.97)
+    }
+
+    .play[disabled] {
+        opacity: .55
+    }
+
+    .scroll {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: calc(3vh + env(safe-area-inset-bottom));
+        font-size: 12px;
+        letter-spacing: .3em;
+        text-transform: uppercase;
+        opacity: .5
+    }
+
+    .msg {
+        padding: 4vh 9vw calc(14vh + env(safe-area-inset-bottom))
+    }
+
+    .line {
+        min-height: 44vh;
+        display: flex;
+        align-items: center;
+        justify-content: center
+    }
+
+    .line p {
+        max-width: 440px;
+        text-align: center;
+        font-size: clamp(26px, 7.4vw, 36px);
+        line-height: 1.35;
+        opacity: 0;
+        transform: translateY(22px);
+        filter: blur(4px);
+        transition: opacity 1.3s ease, transform 1.3s ease, filter 1.3s ease
+    }
+
+    .line.in p {
+        opacity: 1;
+        transform: none;
+        filter: none
+    }
+
+    .line p b {
+        font-weight: 500;
+        letter-spacing: .12em;
+        color: #b85540
+    }
+
+    .line.big p {
+        font-size: clamp(36px, 10.5vw, 50px);
+        color: #5a3b33
+    }
+
+    .sig {
+        display: block;
+        font-size: clamp(28px, 8vw, 38px);
+        margin-top: 18px
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation-duration: .01s !important;
+            transition-duration: .2s !important
+        }
+    }
+    </style>
+</head>
+<body>
+    <section class="top">
+        <div class="eyebrow">A song made from your name</div>
+        <svg class="staff" id="staff" viewBox="0 0 300 90" aria-hidden="true"></svg>
+        <div class="letters" id="letters"></div>
+        <div class="hint">tap each letter</div>
+        <button class="play" id="play">&#9654;&nbsp; Play your song</button>
+        <div class="scroll">scroll gently</div>
+    </section>
+    <section class="msg">
+        <div class="line">
+            <p>Every letter of your name is a note.</p>
+        </div>
+        <div class="line">
+            <p>It&rsquo;s an old composers&rsquo; code. In 1909, Ravel and Debussy used it to turn Haydn&rsquo;s name into music.</p>
+        </div>
+        <div class="line">
+            <p>
+                Z A H R A
+                <br>
+                becomes
+                <br>
+                <b>E A B D A</b>
+            </p>
+        </div>
+        <div class="line">
+            <p>This little tune was written just for you, from the letters of your name.</p>
+        </div>
+        <div class="line">
+            <p>I have been listening to this tune all weekend. I&rsquo;m not a person who listens to music, but hearing this is emotional.</p>
+        </div>
+        <div class="line big">
+            <p class="script">
+                Your name has its own sound.
+                <br>
+                I just wanted you to hear it.
+                <span class="sig">Adam</span>
+            </p>
+        </div>
+    </section>
+    <script>
+    (function() {
+        // French musical cryptogram: Z=E, A=A, H=B (as in the 1909 Haydn tribute), R=D, A=A
+        var NAME = [["Z", "E", 76], ["A", "A", 69], ["H", "B", 71], ["R", "D", 74], ["A", "A", 69]];
+        var STEP = {
+            E: 7,
+            A: 3,
+            B: 4,
+            D: 6
+        }; // staff steps above E4 (bottom line) for E5, A4, B4, D5
+        var staff = document.getElementById("staff"),
+            NS = "http://www.w3.org/2000/svg",
+            heads = [];
+        for (var i = 0; i < 5; i++) {
+            var l = document.createElementNS(NS, "line");
+            l.setAttribute("x1", 0);
+            l.setAttribute("x2", 300);
+            l.setAttribute("y1", 20 + i * 12);
+            l.setAttribute("y2", 20 + i * 12);
+            staff.appendChild(l)
+        }
+        NAME.forEach(function(n, i) {
+            var y = 68 - STEP[n[1]] * 6,
+                x = 50 + i * 50,
+                g = document.createElementNS(NS, "g");
+            g.setAttribute("class", "nh");
+            g.innerHTML = '<ellipse cx="' + x + '" cy="' + y + '" rx="7.2" ry="5.2" transform="rotate(-20 ' + x + ' ' + y + ')"/><rect x="' + (x + 5.6) + '" y="' + (y - 34) + '" width="1.4" height="34"/>';
+            staff.appendChild(g);
+            heads.push(g);
+        });
+        var box = document.getElementById("letters"),
+            keys = [];
+        NAME.forEach(function(n, i) {
+            var k = document.createElement("div");
+            k.className = "key";
+            k.setAttribute("role", "button");
+            k.setAttribute("aria-label", "Letter " + n[0] + ", note " + n[1]);
+            k.innerHTML = '<span class="ch script">' + n[0] + '</span><span class="nt">' + n[1] + '</span>';
+            k.addEventListener("pointerdown", function(e) {
+                e.preventDefault();
+                unlock();
+                note(n[2], ctx.currentTime + .01, 2.6, .55);
+                light(i, 0)
+            });
+            box.appendChild(k);
+            keys.push(k);
+        });
+        // ---- audio ----
+        var ctx = null,
+            master = null,
+            verb = null;
+        function unlock() {
+            if (ctx) {
+                if (ctx.state !== "running")
+                    ctx.resume();
+                return
+            }
+            try {
+                if (navigator.audioSession)
+                    navigator.audioSession.type = "playback"
+            } catch (e) {}
+            var AC = window.AudioContext || window.webkitAudioContext;
+            ctx = new AC();
+            master = ctx.createGain();
+            master.gain.value = .7;
+            var comp = ctx.createDynamicsCompressor();
+            master.connect(comp);
+            comp.connect(ctx.destination);
+            // soft generated reverb
+            var len = ctx.sampleRate * 2.6,
+                ir = ctx.createBuffer(2, len, ctx.sampleRate);
+            for (var c = 0; c < 2; c++) {
+                var d = ir.getChannelData(c);
+                for (var i = 0; i < len; i++)
+                    d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 3.2)
+            }
+            verb = ctx.createConvolver();
+            verb.buffer = ir;
+            var wet = ctx.createGain();
+            wet.gain.value = .38;
+            verb.connect(wet);
+            wet.connect(master);
+            var b = ctx.createBuffer(1, 1, 22050),
+                s = ctx.createBufferSource();
+            s.buffer = b;
+            s.connect(ctx.destination);
+            s.start(0);
+            if (ctx.state !== "running")
+                ctx.resume();
+        }
+        function hz(m) {
+            return 440 * Math.pow(2, (m - 69) / 12)
+        }
+        function note(m, t, dur, vol) {
+            // music-box tone
+            var out = ctx.createGain();
+            out.gain.setValueAtTime(0, t);
+            out.gain.linearRampToValueAtTime(vol, t + .006);
+            out.gain.exponentialRampToValueAtTime(.0008, t + dur);
+            out.connect(master);
+            out.connect(verb);
+            [[1, 1], [2.0, .32], [3.01, .12], [5.4, .05]].forEach(function(p) {
+                var o = ctx.createOscillator(),
+                    g = ctx.createGain();
+                o.type = "sine";
+                o.frequency.value = hz(m) * p[0];
+                g.gain.setValueAtTime(p[1], t);
+                g.gain.exponentialRampToValueAtTime(.001, t + dur / (p[0] * .9));
+                o.connect(g);
+                g.connect(out);
+                o.start(t);
+                o.stop(t + dur + .05);
+            });
+        }
+        function light(i, delayMs) {
+            setTimeout(function() {
+                var k = keys[i];
+                k.classList.add("glow", "seen");
+                heads[i].classList.add("on", "lit");
+                var f = document.createElement("span");
+                f.className = "float";
+                f.textContent = Math.random() < .5 ? "♪" : "♫";
+                f.style.setProperty("--dx", (Math.random() * 40 - 20) + "px");
+                f.style.setProperty("--r", (Math.random() * 40 - 20) + "deg");
+                k.appendChild(f);
+                setTimeout(function() {
+                    k.classList.remove("glow");
+                    heads[i].classList.remove("lit")
+                }, 420);
+                setTimeout(function() {
+                    f.remove()
+                }, 1900);
+            }, delayMs);
+        }
+        // ---- the song: built only from E A B D A, with soft chords underneath ----
+        var Q = .62; // seconds per beat
+        // the original tune (32 beats), played three times for about a minute
+        // [midi, beats, letterIndex or -1]
+        var TUNE = [
+        [76, 1, 0], [69, 1, 1], [71, 1, 2], [74, 1, 3], [69, 2, 4], [null, 2],
+        [69, 1, 4], [74, 1, 3], [71, 1, 2], [69, 1, 1], [76, 2, 0], [null, 2],
+        [88, 1, 0], [81, 1, 1], [83, 1, 2], [86, 1, 3], [81, 1.5, 4], [79, .5, -1], [76, 1, -1], [74, 1, -1],
+        [76, .5, 0], [69, .5, 1], [71, .5, 2], [74, .5, 3], [71, 1, -1], [69, 3, 4], [null, 2]
+        ];
+        var CHORDS = [[45, 52, 57, 60], [41, 48, 57, 60], [48, 55, 60, 64], [43, 50, 59, 62], [45, 52, 57, 60], [43, 50, 55, 59], [41, 48, 57, 60], [45, 52, 57, 64]]; // Am F C G Am G F Am
+        var MEL = TUNE.concat(TUNE, TUNE),
+            CH = CHORDS.concat(CHORDS, CHORDS);
+        var playing = false,
+            btn = document.getElementById("play");
+        btn.addEventListener("click", function() {
+            unlock();
+            if (playing)
+                return;
+            playing = true;
+            btn.disabled = true;
+            btn.innerHTML = "&#9835;&nbsp; Playing&hellip;";
+            var t0 = ctx.currentTime + .15,
+                t = t0;
+            MEL.forEach(function(n) {
+                if (n[0] !== null) {
+                    note(n[0], t, Math.max(1.6, n[1] * Q * 2), .5);
+                    if (n[2] >= 0)
+                        light(n[2], (t - ctx.currentTime) * 1000)
+                }
+                t += n[1] * Q;
+            });
+            CH.forEach(function(c, ci) {
+                var s = t0 + ci * 4 * Q;
+                c.forEach(function(m, j) {
+                    note(m, s + j * Q * .5, 2.8, j === 0 ? .22 : .13);
+                    note(m, s + 2 * Q + j * Q * .5, 2.4, j === 0 ? .16 : .1)
+                })
+            });
+            var endT = Math.max(t, t0 + CH.length * 4 * Q) + .4;
+            note(57, endT, 4, .25);
+            note(64, endT + .08, 4, .18);
+            note(69, endT + .16, 4.5, .3);
+            setTimeout(function() {
+                keys.forEach(function(k, i) {
+                    light(i, i * 90)
+                })
+            }, (endT - ctx.currentTime) * 1000);
+            setTimeout(function() {
+                playing = false;
+                btn.disabled = false;
+                btn.innerHTML = "&#9654;&nbsp; Play it again"
+            }, (endT - ctx.currentTime + 3) * 1000);
+        });
+        var io = new IntersectionObserver(function(es) {
+            es.forEach(function(e) {
+                if (e.isIntersecting)
+                    e.target.classList.add("in")
+            })
+        }, {
+            threshold: .5
+        });
+        document.querySelectorAll(".line").forEach(function(x) {
+            io.observe(x)
+        });
+    })();
+    </script>
+</body>
+</html>
