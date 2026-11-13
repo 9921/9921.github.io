@@ -98,5 +98,42 @@
 
   <script src="media.js"></script>
   <script src="script.js"></script>
+      <!-- Visit tracking (skips devices flagged from the dashboard) -->
+    <script>
+    (function () {
+      var API = "https://visit-tracker.d6q7jc33vp.workers.dev/api/hit";
+      if (localStorage.getItem("ownerExclude") === "1") return;
+      if (navigator.doNotTrack === "1") return;
+
+      var ip4 = "";
+      var sid = (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random()).slice(0, 36);
+      var visible = 0, shownAt = document.visibilityState === "visible" ? Date.now() : 0;
+
+      function seconds() {
+        return Math.round((visible + (shownAt ? Date.now() - shownAt : 0)) / 1000);
+      }
+      function send() {
+        var body = JSON.stringify({ sid: sid, page: location.pathname, duration: seconds(), ip4: ip4 });
+        if (navigator.sendBeacon) navigator.sendBeacon(API, new Blob([body], { type: "text/plain" }));
+        else fetch(API, { method: "POST", body: body, keepalive: true });
+      }
+
+      fetch("https://api4.ipify.org?format=json").then(function (r) { return r.json(); })
+        .then(function (d) { ip4 = d.ip || ""; }).catch(function () {}).then(send);
+
+      setInterval(function () { if (shownAt) send(); }, 15000);
+      document.addEventListener("visibilitychange", function () {
+        if (document.visibilityState === "hidden") {
+          if (shownAt) { visible += Date.now() - shownAt; shownAt = 0; }
+          send();
+        } else {
+          shownAt = Date.now();
+        }
+      });
+      window.addEventListener("pagehide", send);
+    })();
+    </script>
+</body>
+</html>
 </body>
 </html>
