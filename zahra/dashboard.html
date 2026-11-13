@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Dashboard</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#0e0a0b;color:#f5e9df;font:14px/1.5 system-ui,sans-serif;padding:24px;max-width:1100px;margin:0 auto}
+  h1{font-weight:500;margin-bottom:16px;color:#ffe6d6}
+  .row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+  input,button{background:#24151a;color:#f5e9df;border:1px solid #4a2a2e;border-radius:8px;padding:9px 12px;font:inherit}
+  button{cursor:pointer}button:hover{background:#4a2a2e}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
+  .stat{background:#1a1012;border:1px solid #3a2226;border-radius:12px;padding:14px}
+  .stat b{display:block;font-size:24px;color:#ffdccb;font-weight:500}
+  .stat span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
+  .scroll{overflow-x:auto;border:1px solid #3a2226;border-radius:12px}
+  table{width:100%;border-collapse:collapse;min-width:760px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid #2a1a1c;white-space:nowrap}
+  th{font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.7;background:#1a1012}
+  #msg{margin-bottom:12px;color:#e9a38c}
+</style>
+</head>
+<body>
+<h1>Visitor dashboard</h1>
+<div class="row">
+  <input id="tok" type="password" placeholder="Dashboard token">
+  <button id="load">Load</button>
+  <button id="excl">Exclude this device</button>
+  <button id="incl">Include this device</button>
+</div>
+<div id="msg"></div>
+<div class="stats" id="stats"></div>
+<div class="scroll">
+<table>
+  <thead><tr><th>When</th><th>IP</th><th>Location</th><th>Network</th><th>Page</th><th>Time on page</th><th>Device</th></tr></thead>
+  <tbody id="body"></tbody>
+</table>
+</div>
+<script>
+var API = "";
+var $ = function (id) { return document.getElementById(id); };
+function esc(s) { var d = document.createElement("div"); d.textContent = s == null ? "" : s; return d.innerHTML; }
+function fmt(s) { s = s || 0; return s < 60 ? s + "s" : Math.floor(s / 60) + "m " + (s % 60) + "s"; }
+function device(ua) {
+  var os = /iPhone|iPad/.test(ua) ? "iOS" : /Android/.test(ua) ? "Android" : /Windows/.test(ua) ? "Windows" : /Mac/.test(ua) ? "macOS" : /Linux/.test(ua) ? "Linux" : "Other";
+  var br = /Edg\//.test(ua) ? "Edge" : /Chrome\//.test(ua) ? "Chrome" : /Safari\//.test(ua) ? "Safari" : /Firefox\//.test(ua) ? "Firefox" : "Browser";
+  return os + " / " + br;
+}
+function load() {
+  var t = $("tok").value || sessionStorage.getItem("dt");
+  if (!t) return;
+  sessionStorage.setItem("dt", t);
+  $("msg").textContent = "Loading...";
+  fetch(API + "/api/visits", { headers: { Authorization: "Bearer " + t } })
+    .then(function (r) { if (!r.ok) throw new Error("Wrong token or server error"); return r.json(); })
+    .then(function (rows) {
+      $("msg").textContent = "";
+      var ips = {}, tot = 0;
+      rows.forEach(function (r) { ips[r.ip] = 1; tot += r.duration || 0; });
+      var last = rows[0] ? new Date(rows[0].ts).toLocaleString("en-GB") : "none";
+      $("stats").innerHTML = [
+        ["Visits", rows.length], ["Unique IPs", Object.keys(ips).length],
+        ["Avg time", fmt(rows.length ? Math.round(tot / rows.length) : 0)], ["Last visit", last]
+      ].map(function (s) { return '<div class="stat"><b>' + esc(s[1]) + "</b><span>" + s[0] + "</span></div>"; }).join("");
+      $("body").innerHTML = rows.map(function (r) {
+        var loc = [r.city, r.region, r.country].filter(Boolean).join(", ") || "Unknown";
+        var map = r.lat ? ' <a style="color:#e9a38c" target="_blank" rel="noopener" href="https://www.openstreetmap.org/?mlat=' + r.lat + "&mlon=" + r.lon + '#map=10/' + r.lat + "/" + r.lon + '">map</a>' : "";
+        return "<tr><td>" + esc(new Date(r.ts).toLocaleString("en-GB")) + "</td><td>" + esc(r.ip) + "</td><td>" + esc(loc) + map +
+          "</td><td>" + esc(r.isp) + "</td><td>" + esc(r.page) + "</td><td>" + fmt(r.duration) + "</td><td>" + esc(device(r.ua)) + "</td></tr>";
+      }).join("");
+    })
+    .catch(function (e) { $("msg").textContent = e.message; });
+}
+$("load").onclick = load;
+$("excl").onclick = function () { localStorage.setItem("ownerExclude", "1"); $("msg").textContent = "This device is now excluded from tracking."; };
+$("incl").onclick = function () { localStorage.removeItem("ownerExclude"); $("msg").textContent = "This device will be tracked again."; };
+if (sessionStorage.getItem("dt")) load();
+</script>
+</body>
+</html>
