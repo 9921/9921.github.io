@@ -40,24 +40,29 @@
 </table>
 </div>
 <script>
-var API = "";
+var API = "https://visit-tracker.d6q7jc33vp.workers.dev";
 var $ = function (id) { return document.getElementById(id); };
 function esc(s) { var d = document.createElement("div"); d.textContent = s == null ? "" : s; return d.innerHTML; }
 function fmt(s) { s = s || 0; return s < 60 ? s + "s" : Math.floor(s / 60) + "m " + (s % 60) + "s"; }
 function device(ua) {
+  ua = ua || "";
   var os = /iPhone|iPad/.test(ua) ? "iOS" : /Android/.test(ua) ? "Android" : /Windows/.test(ua) ? "Windows" : /Mac/.test(ua) ? "macOS" : /Linux/.test(ua) ? "Linux" : "Other";
   var br = /Edg\//.test(ua) ? "Edge" : /Chrome\//.test(ua) ? "Chrome" : /Safari\//.test(ua) ? "Safari" : /Firefox\//.test(ua) ? "Firefox" : "Browser";
   return os + " / " + br;
 }
 function load() {
   var t = $("tok").value || sessionStorage.getItem("dt");
-  if (!t) return;
+  if (!t) { $("msg").textContent = "Enter your dashboard token first."; return; }
   sessionStorage.setItem("dt", t);
   $("msg").textContent = "Loading...";
   fetch(API + "/api/visits", { headers: { Authorization: "Bearer " + t } })
-    .then(function (r) { if (!r.ok) throw new Error("Wrong token or server error"); return r.json(); })
+    .then(function (r) {
+      if (r.status === 401) { sessionStorage.removeItem("dt"); throw new Error("Wrong token"); }
+      if (!r.ok) throw new Error("Server error (" + r.status + ")");
+      return r.json();
+    })
     .then(function (rows) {
-      $("msg").textContent = "";
+      $("msg").textContent = rows.length ? "" : "No visits recorded yet.";
       var ips = {}, tot = 0;
       rows.forEach(function (r) { ips[r.ip] = 1; tot += r.duration || 0; });
       var last = rows[0] ? new Date(rows[0].ts).toLocaleString("en-GB") : "none";
