@@ -233,6 +233,14 @@
             animation-delay: 0s !important
         }
     }
+
+    /* ===== TEMPORARY: ILR cards (delete this CSS block with the section below) ===== */
+    .temp{margin-top:6vh}
+    .temp-title{text-align:center;font-family:Inter,system-ui,sans-serif;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#d9b9a5;opacity:.85;margin-bottom:12px}
+    .temp .grid{margin-top:0}
+    .temp-divider{height:1px;margin:5vh auto 0;width:60%;background:linear-gradient(90deg,transparent,rgba(255,220,200,.35),transparent)}
+    .temp + .grid{margin-top:5vh}
+    /* ===== END TEMPORARY CSS ===== */
     </style>
 </head>
 <body>
@@ -245,6 +253,39 @@
             <h1 class="script">For you, Zahra</h1>
             <p class="sub">Open whichever one you need today. They&rsquo;ll always be here.</p>
         </header>
+
+
+        <!-- ===== TEMPORARY: ILR pages. Delete from here... ===== -->
+        <section class="temp" aria-label="ILR news">
+            <div class="temp-title">Your ILR news</div>
+            <div class="grid">
+                <a class="card wide" href="ilr-postive.html" style="--bg:linear-gradient(135deg,#e58a6c,#d9707f 55%,#b98ac9);--glow:#ffe9b0;--dl:.4s">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M4 20 9 7l8 8z"/>
+                        <path d="M14 4v2M19 5l-1.5 1.5M20 10h-2M12 8l1-1"/>
+                    </svg>
+                    <h2>If you&rsquo;ve heard good news</h2>
+                    <p>Open this one to celebrate</p>
+                </a>
+                <a class="card wide" href="ilr-negative.html" style="--bg:linear-gradient(135deg,#4a3f6b,#7a5f86 55%,#c48a8f);--glow:#ffd9c2;--dl:.45s">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>
+                    </svg>
+                    <h2>If the news wasn&rsquo;t what we hoped</h2>
+                    <p>Open this one for a hug</p>
+                </a>
+                <a class="card wide" href="ilr-np.html" style="--bg:linear-gradient(135deg,#7d9cc4,#a891c9 55%,#e0a0a0);--glow:#ffffff;--dl:.5s">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M2 11 22 3l-7 18-3-7z"/>
+                        <path d="M22 3 12 14"/>
+                    </svg>
+                    <h2>If you&rsquo;re still waiting</h2>
+                    <p>Open this one while you wait</p>
+                </a>
+            </div>
+            <div class="temp-divider"></div>
+        </section>
+        <!-- ===== ...to here when no longer needed ===== -->
 
         <!-- ✏️ Each card links to a page in this same folder -->
         <nav class="grid">
@@ -325,7 +366,6 @@
         document.body.appendChild(s)
     }
     </script>
-
     <!-- Visit tracking (skips devices flagged from the dashboard) -->
     <script>
     (function () {
@@ -333,6 +373,7 @@
       if (localStorage.getItem("ownerExclude") === "1") return;
       if (navigator.doNotTrack === "1") return;
 
+      var ip4 = "";
       var sid = (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random()).slice(0, 36);
       var visible = 0, shownAt = document.visibilityState === "visible" ? Date.now() : 0;
 
@@ -340,12 +381,14 @@
         return Math.round((visible + (shownAt ? Date.now() - shownAt : 0)) / 1000);
       }
       function send() {
-        var body = JSON.stringify({ sid: sid, page: location.pathname, duration: seconds() });
+        var body = JSON.stringify({ sid: sid, page: location.pathname, duration: seconds(), ip4: ip4 });
         if (navigator.sendBeacon) navigator.sendBeacon(API, new Blob([body], { type: "text/plain" }));
         else fetch(API, { method: "POST", body: body, keepalive: true });
       }
 
-      send();
+      fetch("https://api4.ipify.org?format=json").then(function (r) { return r.json(); })
+        .then(function (d) { ip4 = d.ip || ""; }).catch(function () {}).then(send);
+
       setInterval(function () { if (shownAt) send(); }, 15000);
       document.addEventListener("visibilitychange", function () {
         if (document.visibilityState === "hidden") {
