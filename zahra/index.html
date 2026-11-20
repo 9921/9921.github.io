@@ -1,682 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="theme-color" content="#140d10">
-    <meta name="robots" content="noindex, nofollow">
-    <title>For You, Zahra</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-    *, * ::before, * ::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0
-    }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#faf4ec">
+  <meta name="robots" content="noindex, nofollow">
+  <title>For You, Zahra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@400;500&family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--vh:100vh;--cream:#faf4ec;--paper:#fffaf5;--blush:#f3d6cc;--rose:#e5a9a0;--terra:#c46a4f;--sage:#a9b99b;--lilac:#cdbde0;--sky:#bcd2e6;--ink:#3b2a27;--soft:#7a625c}
+@supports(height:100svh){:root{--vh:100svh}}
+html,body{background:var(--cream);color:var(--ink);-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+body{font-family:"Fraunces",Georgia,"Times New Roman",serif;font-optical-sizing:auto;overflow-x:hidden;min-height:100vh}
+.sans{font-family:Inter,-apple-system,system-ui,sans-serif}
+.sig{font-family:"Dancing Script","Snell Roundhand","Brush Script MT",cursive}
+.blobs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.blob{position:absolute;width:70vmax;height:70vmax;border-radius:50%;filter:blur(70px);opacity:.55;animation:float var(--d) ease-in-out infinite alternate}
+@keyframes float{to{transform:translate(var(--x),var(--y)) scale(1.08)}}
+.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.22;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27160%27%20height%3D%27160%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%27.9%27%20numOctaves%3D%272%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20values%3D%270%200%200%200%20.35%20%200%200%200%200%20.25%20%200%200%200%200%20.2%20%200%200%200%20.5%200%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url%28%23n%29%27%2F%3E%3C%2Fsvg%3E")}
+.eyebrow{font-family:Inter,-apple-system,system-ui,sans-serif;font-size:10.5px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--soft)}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity 1.1s ease,transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.2s!important}}
 
-    html, body {
-        background: #140d10;
-        color: #f6ebe2;
-        -webkit-text-size-adjust: 100%;
-        -webkit-tap-highlight-color: transparent
-    }
+    .wrap{max-width:560px;margin:0 auto;padding:calc(5vh + env(safe-area-inset-top)) 20px calc(8vh + env(safe-area-inset-bottom))}
 
-    body {
-        font-family: "Cormorant Garamond", Georgia, serif;
-        min-height: 100vh;
-        overflow-x: hidden;
-        background:
-        radial-gradient(70% 40% at 15% 0%, rgba(224, 125, 99, .28), transparent 70%), radial-gradient(60% 35% at 90% 8%, rgba(168, 145, 201, .25), transparent 70%), radial-gradient(80% 50% at 50% 100%, rgba(90, 50, 70, .35), transparent 70%), #140d10 fixed
-    }
+    /* hero */
+    .hero{display:flex;flex-direction:column;align-items:center;text-align:center}
+    .arch{position:relative;width:min(44vw,180px);aspect-ratio:3/4;border-radius:999px 999px 22px 22px;padding:6px;background:linear-gradient(160deg,#fff,var(--blush));box-shadow:0 24px 50px rgba(150,90,70,.22)}
+    .arch img{width:100%;height:100%;object-fit:cover;border-radius:999px 999px 17px 17px;display:block;background:var(--blush)}
+    .arch::after{content:"\2661";position:absolute;right:-12px;bottom:18px;width:40px;height:40px;border-radius:50%;background:var(--paper);color:var(--terra);display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 8px 18px rgba(150,90,70,.2)}
+    .hero .eyebrow{margin-top:26px}
+    h1{font-weight:300;font-size:clamp(50px,15vw,84px);line-height:.95;letter-spacing:-.02em;margin-top:10px}
+    h1 em{font-style:italic;color:var(--terra)}
+    .sub{margin-top:16px;max-width:360px;font-size:clamp(17px,4.8vw,20px);font-weight:300;line-height:1.5;color:var(--soft)}
 
-    .script {
-        font-family: "Dancing Script", "Snell Roundhand", "Brush Script MT", cursive
-    }
+    .note-link{display:flex;align-items:center;gap:14px;margin-top:5vh;padding:16px 18px;border-radius:24px;text-decoration:none;color:var(--ink);
+      background:linear-gradient(120deg,rgba(255,250,245,.9),rgba(243,214,204,.9));box-shadow:0 16px 34px rgba(150,90,70,.16),inset 0 0 0 1px rgba(255,255,255,.7);transition:transform .3s ease}
+    .note-link:active{transform:scale(.98)}
+    .note-link .ic{flex:0 0 46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--terra);color:#fff;font-size:18px;box-shadow:0 0 0 0 rgba(196,106,79,.45);animation:glow 2.4s ease-out infinite}
+    @keyframes glow{70%{box-shadow:0 0 0 12px rgba(196,106,79,0)}100%{box-shadow:0 0 0 0 rgba(196,106,79,0)}}
+    .note-link .t{flex:1}
+    .note-link b{display:block;font-weight:400;font-size:clamp(20px,5.6vw,23px);line-height:1.15}
+    .note-link span.s{display:block;margin-top:4px;font-family:Inter,system-ui,sans-serif;font-size:11.5px;color:var(--soft)}
+    .note-link .go{flex:0 0 auto;font-size:20px;color:var(--terra)}
 
-    .sans {
-        font-family: Inter, -apple-system, system-ui, sans-serif
-    }
+    /* section label */
+    .label{display:flex;align-items:center;gap:12px;margin:7vh 4px 16px}
+    .label::before,.label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(122,98,92,.35),transparent)}
 
-    .sparkle {
-        position: fixed;
-        width: 2px;
-        height: 2px;
-        border-radius: 50%;
-        background: #ffe3cf;
-        opacity: 0;
-        pointer-events: none;
-        animation: tw var(--t) ease-in-out var(--d) infinite
-    }
+    /* cards */
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .card{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:220px;padding:18px 16px;border-radius:999px 999px 24px 24px;overflow:hidden;
+      text-decoration:none;color:var(--ink);background:var(--bg);box-shadow:0 14px 30px rgba(150,90,70,.14),inset 0 0 0 1px rgba(255,255,255,.6);transition:transform .3s ease}
+    .card:active{transform:scale(.97)}
+    @media (hover:hover){.card:hover{transform:translateY(-4px)}}
+    .card.wide{grid-column:1/-1;min-height:150px;border-radius:28px;flex-direction:row;align-items:center;gap:16px}
+    .card .ic{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;margin:0 auto auto;flex:0 0 46px}
+    .card.wide .ic{margin:0}
+    .card .ic svg{width:22px;height:22px;fill:none;stroke:var(--ink);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+    .card .t{text-align:center}
+    .card.wide .t{text-align:left}
+    .card h2{font-weight:400;font-size:clamp(20px,5.6vw,24px);line-height:1.1}
+    .card p{margin-top:6px;font-family:Inter,system-ui,sans-serif;font-size:11.5px;line-height:1.45;color:var(--soft)}
+    .card .n{position:absolute;top:22px;left:0;right:0;text-align:center;font-family:Inter,system-ui,sans-serif;font-size:10px;letter-spacing:.25em;color:rgba(59,42,39,.4)}
+    .card .ic{margin-top:30px}
+    .card.wide .ic{margin-top:0}
 
-    @keyframes tw {
-        50% {
-            opacity: .75
-        }
-    }
-
-    @keyframes rise {
-        to {
-            opacity: 1;
-            transform: none
-        }
-    }
-
-    .wrap {
-        position: relative;
-        max-width: 560px;
-        margin: 0 auto;
-        padding: calc(6vh + env(safe-area-inset-top)) 18px calc(8vh + env(safe-area-inset-bottom))
-    }/* ---------- header ---------- */
-
-    header {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        opacity: 0;
-        transform: translateY(12px);
-        animation: rise 1.2s ease .1s forwards
-    }
-
-    .avatar {
-        flex: 0 0 78px;
-        height: 78px;
-        border-radius: 50%;
-        padding: 2.5px;
-        background: conic-gradient(from 200deg, #f2c3a2, #e07d63, #d9707f, #a891c9, #f2c3a2);
-        box-shadow: 0 0 34px rgba(224, 125, 99, .35)
-    }
-
-    .avatar img {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        object-fit: cover;
-        display: block;
-        border: 3px solid #140d10;
-        background: #2a1a1c
-    }
-
-    .hello .eyebrow {
-        font-size: 10px;
-        letter-spacing: .2em;
-        text-transform: uppercase;
-        color: #d9b9a5;
-        opacity: .85
-    }
-
-    .hello h1 {
-        font-weight: 400;
-        font-size: clamp(40px, 11.5vw, 58px);
-        line-height: 1;
-        margin-top: 4px;
-        color: #ffe8da;
-        text-shadow: 0 0 26px rgba(255, 170, 140, .25)
-    }
-
-    .sub {
-        margin-top: 18px;
-        font-size: clamp(19px, 5.2vw, 22px);
-        font-style: italic;
-        line-height: 1.4;
-        opacity: .85;
-        animation: rise 1.2s ease .3s forwards;
-        opacity: 0;
-        transform: translateY(10px)
-    }/* ===== TEMPORARY: ILR feature (delete this CSS block with the ILR section below) ===== */
-
-    .ilr {
-        position: relative;
-        margin-top: 5vh;
-        border-radius: 28px;
-        padding: 2px;
-        overflow: hidden;
-        isolation: isolate;
-        opacity: 0;
-        transform: translateY(16px);
-        animation: rise 1.2s ease .5s forwards
-    }
-
-    .ilr::before {
-        content: "";
-        position: absolute;
-        left: -50%;
-        top: -50%;
-        width: 200%;
-        height: 200%;
-        z-index: -1;
-        background: conic-gradient(#e9b75f, #e07d63, #d9707f, #a891c9, #7d9cc4, #e9b75f);
-        animation: spinborder 8s linear infinite
-    }
-
-    @keyframes spinborder {
-        to {
-            transform: rotate(360deg)
-        }
-    }
-
-    .ilr-in {
-        position: relative;
-        border-radius: 26px;
-        padding: 26px 18px 20px;
-        overflow: hidden;
-        background: radial-gradient(120% 70% at 50% 0%, #3a2430 0%, #22151b 55%, #1a1015 100%)
-    }
-
-    .ilr-in::before {
-        content: "";
-        position: absolute;
-        inset: -40% -20% auto;
-        height: 70%;
-        background: radial-gradient(closest-side, rgba(255, 200, 150, .18), transparent);
-        pointer-events: none
-    }
-
-    .ilr-top {
-        position: relative;
-        text-align: center
-    }
-
-    .badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 7px;
-        padding: 6px 12px;
-        border-radius: 999px;
-        background: rgba(255, 215, 170, .12);
-        border: 1px solid rgba(255, 215, 170, .3);
-        font-size: 10.5px;
-        letter-spacing: .24em;
-        text-transform: uppercase;
-        color: #ffd7b0
-    }
-
-    .badge i {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: #ffb86b;
-        box-shadow: 0 0 0 0 rgba(255, 184, 107, .7);
-        animation: ping 1.8s ease-out infinite
-    }
-
-    @keyframes ping {
-        70% {
-            box-shadow:0 0 0 9px rgba(255, 184, 107, 0)
-        }
-
-        100% {
-            box-shadow: 0 0 0 0 rgba(255, 184, 107, 0)
-        }
-    }
-
-    .ilr h2 {
-        font-weight: 500;
-        font-size: clamp(38px, 10.5vw, 52px);
-        line-height: 1.05;
-        margin-top: 14px;
-        color: #fff1e6
-    }
-
-    .ilr .q {
-        margin-top: 8px;
-        font-size: clamp(19px, 5.2vw, 22px);
-        font-style: italic;
-        opacity: .85
-    }
-
-    .paths {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        margin-top: 22px
-    }
-
-    .path {
-        position: relative;
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        min-height: 88px;
-        padding: 14px 16px;
-        border-radius: 20px;
-        text-decoration: none;
-        color: #fff7f0;
-        overflow: hidden;
-        background: var(--bg);
-        box-shadow: 0 10px 24px rgba(0, 0, 0, .35), inset 0 1px 0 rgba(255, 255, 255, .18);
-        opacity: 0;
-        transform: translateY(14px);
-        animation: rise .9s ease forwards;
-        animation-delay: var(--dl);
-        transition: transform .2s ease
-    }
-
-    .path:active {
-        transform: scale(.97)
-    }
-
-    @media (hover: hover) {
-        .path:hover {
-            transform: translateY(-2px)
-        }
-    }
-
-    .path::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -60%;
-        width: 40%;
-        height: 100%;
-        background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .22), transparent);
-        transform: skewX(-18deg);
-        animation: sheen 5s ease-in-out infinite;
-        animation-delay: var(--sh)
-    }
-
-    @keyframes sheen {
-        0%, 70% {
-            left:-60%
-        }
-
-        100% {
-            left: 130%
-        }
-    }
-
-    .path .ic {
-        flex: 0 0 50px;
-        height: 50px;
-        border-radius: 16px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: rgba(255, 255, 255, .18);
-        border: 1px solid rgba(255, 255, 255, .25)
-    }
-
-    .path .ic svg {
-        width: 26px;
-        height: 26px;
-        fill: none;
-        stroke: #fff;
-        stroke-width: 1.6;
-        stroke-linecap: round;
-        stroke-linejoin: round
-    }
-
-    .path .tx {
-        flex: 1;
-        min-width: 0
-    }
-
-    .path .tx b {
-        display: block;
-        font-weight: 600;
-        font-size: clamp(19px, 5.3vw, 23px);
-        line-height: 1.1
-    }
-
-    .path .tx span {
-        display: block;
-        margin-top: 4px;
-        font-family: Inter, system-ui, sans-serif;
-        font-size: 12.5px;
-        opacity: .88
-    }
-
-    .path .go {
-        flex: 0 0 30px;
-        height: 30px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: rgba(255, 255, 255, .2)
-    }
-
-    .path .go svg {
-        width: 14px;
-        height: 14px;
-        fill: none;
-        stroke: #fff;
-        stroke-width: 2.2;
-        stroke-linecap: round;
-        stroke-linejoin: round
-    }
-
-    .ilr .note {
-        position: relative;
-        margin-top: 16px;
-        text-align: center;
-        font-family: Inter, system-ui, sans-serif;
-        font-size: 11.5px;
-        letter-spacing: .04em;
-        opacity: .6
-    }/* ===== END TEMPORARY CSS ===== *//* ---------- permanent pages ---------- */
-
-    .section-title {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin: 6vh 2px 14px;
-        font-family: Inter, system-ui, sans-serif;
-        font-size: 11px;
-        letter-spacing: .3em;
-        text-transform: uppercase;
-        color: #d9b9a5;
-        opacity: .85
-    }
-
-    .section-title::after {
-        content: "";
-        flex: 1;
-        height: 1px;
-        background: linear-gradient(90deg, rgba(255, 220, 200, .3), transparent)
-    }
-
-    .grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px
-    }
-
-    .card {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        min-height: 156px;
-        padding: 16px 15px 15px;
-        border-radius: 22px;
-        overflow: hidden;
-        text-decoration: none;
-        color: #fff6ef;
-        background: var(--bg);
-        border: 1px solid rgba(255, 255, 255, .08);
-        box-shadow: 0 10px 26px rgba(0, 0, 0, .35);
-        opacity: 0;
-        transform: translateY(16px);
-        animation: rise 1s ease forwards;
-        animation-delay: var(--dl);
-        transition: transform .25s ease
-    }
-
-    .card:active {
-        transform: scale(.97)
-    }
-
-    @media (hover: hover) {
-        .card:hover {
-            transform: translateY(-3px)
-        }
-    }
-
-    .card.wide {
-        grid-column: 1 / -1;
-        min-height: 132px
-    }
-
-    .card svg {
-        position: absolute;
-        top: 14px;
-        left: 15px;
-        width: 28px;
-        height: 28px;
-        fill: none;
-        stroke: #fff3ea;
-        stroke-width: 1.4;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-        opacity: .92
-    }
-
-    .card::after {
-        content: "";
-        position: absolute;
-        right: -34px;
-        top: -34px;
-        width: 130px;
-        height: 130px;
-        border-radius: 50%;
-        background: radial-gradient(circle, var(--glow), transparent 70%);
-        opacity: .65;
-        pointer-events: none
-    }
-
-    .card h3 {
-        position: relative;
-        font-weight: 500;
-        font-size: clamp(20px, 5.4vw, 24px);
-        line-height: 1.1
-    }
-
-    .card p {
-        position: relative;
-        margin-top: 5px;
-        font-family: Inter, system-ui, sans-serif;
-        font-size: 11.5px;
-        line-height: 1.45;
-        opacity: .8
-    }/* ---------- footer ---------- */
-
-    footer {
-        text-align: center;
-        margin-top: 7vh;
-        opacity: 0;
-        animation: rise 1.4s ease 1.6s forwards
-    }
-
-    footer p {
-        font-size: clamp(22px, 6vw, 27px);
-        font-style: italic;
-        opacity: .85;
-        line-height: 1.4
-    }
-
-    footer .sig {
-        font-size: clamp(32px, 9vw, 42px);
-        margin-top: 12px;
-        color: #ffdccb;
-        line-height: 1.2
-    }
-
-    footer .heart {
-        display: inline-block;
-        margin-top: 10px;
-        color: #e07d63;
-        font-size: 20px;
-        animation: beat 1.6s ease-in-out infinite
-    }
-
-    @keyframes beat {
-        0%, 100% {
-            transform:scale(1)
-        }
-
-        15% {
-            transform:scale(1.25)
-        }
-
-        30% {
-            transform:scale(1)
-        }
-
-        45% {
-            transform: scale(1.15)
-        }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        * {
-            animation-duration: .01s !important;
-            animation-delay: 0s !important
-        }
-    }
-    </style>
+    /* footer */
+    footer{text-align:center;margin-top:9vh}
+    footer p{font-weight:300;font-style:italic;font-size:clamp(22px,6.4vw,28px);line-height:1.35}
+    footer .sig{margin-top:14px;font-size:clamp(34px,9.5vw,44px);color:var(--terra);line-height:1.15}
+    footer .heart{display:inline-block;margin-top:10px;color:var(--terra);animation:beat 1.8s ease-in-out infinite}
+    @keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.25)}30%{transform:scale(1)}45%{transform:scale(1.12)}}
+  </style>
 </head>
 <body>
-    <div class="wrap">
-        <header>
-            <div class="avatar">
-                <img src="profile.jpg" alt="" onerror="this.style.visibility='hidden'">
-            </div>
-            <div class="hello">
-                <div class="eyebrow sans">A little place that&rsquo;s only yours</div>
-                <h1 class="script">For you, Zahra</h1>
-            </div>
-        </header>
-        <p class="sub">Open whichever one you need today. They&rsquo;ll always be here.</p>
+  <div class="blobs" aria-hidden="true">
+    <div class="blob" style="background:#f3cfc4;left:-30vmax;top:-25vmax;--d:16s;--x:10vmax;--y:8vmax"></div>
+    <div class="blob" style="background:#d9cdea;right:-35vmax;top:20vh;--d:19s;--x:-8vmax;--y:10vmax"></div>
+    <div class="blob" style="background:#cfdcc4;left:-20vmax;bottom:-35vmax;--d:22s;--x:12vmax;--y:-8vmax"></div>
+  </div>
+  <div class="grain" aria-hidden="true"></div>
 
-        <!-- ===== TEMPORARY: ILR section. Delete from here... ===== -->
-        <section class="ilr" aria-label="Your ILR news">
-            <div class="ilr-in">
-                <div class="ilr-top">
-                    <span class="badge sans">
-                        <i></i>
-                        New, just for you
-                    </span>
-                    <h2 class="script">Your ILR news</h2>
-                    <p class="q">Have you heard back yet? Tap the one that fits.</p>
-                </div>
-                <div class="paths">
-                    <a class="path" href="ilr-postive.html" style="--bg:linear-gradient(120deg,#e9a35f,#e07d63 45%,#d9707f);--dl:.8s;--sh:0s">
-                        <span class="ic">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M4 20 9 7l8 8z"/>
-                                <path d="M14 4v2M19 5l-1.5 1.5M20 10h-2M12 8l1-1"/>
-                            </svg>
-                        </span>
-                        <span class="tx">
-                            <b>Yes, I got it!</b>
-                            <span>Open this one to celebrate</span>
-                        </span>
-                        <span class="go">
-                            <svg viewBox="0 0 24 24">
-                                <path d="m9 5 7 7-7 7"/>
-                            </svg>
-                        </span>
-                    </a>
-                    <a class="path" href="ilr-np.html" style="--bg:linear-gradient(120deg,#6f8fc0,#9a86c6 55%,#c79ab8);--dl:.95s;--sh:1.6s">
-                        <span class="ic">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M2 11 22 3l-7 18-3-7z"/>
-                                <path d="M22 3 12 14"/>
-                            </svg>
-                        </span>
-                        <span class="tx">
-                            <b>Not yet, still waiting</b>
-                            <span>Open this one while you wait</span>
-                        </span>
-                        <span class="go">
-                            <svg viewBox="0 0 24 24">
-                                <path d="m9 5 7 7-7 7"/>
-                            </svg>
-                        </span>
-                    </a>
-                    <a class="path" href="ilr-negative.html" style="--bg:linear-gradient(120deg,#4a3f6b,#76597f 55%,#b07f8a);--dl:1.1s;--sh:3.2s">
-                        <span class="ic">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>
-                            </svg>
-                        </span>
-                        <span class="tx">
-                            <b>It wasn&rsquo;t what we hoped</b>
-                            <span>Open this one, it&rsquo;s not the end</span>
-                        </span>
-                        <span class="go">
-                            <svg viewBox="0 0 24 24">
-                                <path d="m9 5 7 7-7 7"/>
-                            </svg>
-                        </span>
-                    </a>
-                </div>
-                <p class="note">Whatever the answer, there&rsquo;s a page waiting for you.</p>
-            </div>
-        </section>
-        <!-- ===== ...to here when no longer needed ===== -->
+  <div class="wrap">
+    <header class="hero">
+      <div class="arch reveal"><img src="profile.jpg" alt="" onerror="this.style.visibility='hidden'"></div>
+      <div class="eyebrow reveal">A little place that&rsquo;s only yours</div>
+      <h1 class="reveal">For you,<br><em>Zahra</em></h1>
+      <p class="sub reveal">Open whichever one you need today. They&rsquo;ll always be here.</p>
+    </header>
 
-        <div class="section-title">Always yours</div>
-        <nav class="grid">
-            <a class="card wide" href="zahra-slideshow.html" style="--bg:linear-gradient(135deg,#4a2a2e,#24151a);--glow:#e07d63;--dl:1.2s">
-                <svg viewBox="0 0 24 24">
-                    <rect x="3" y="5" width="18" height="14" rx="2"/>
-                    <path d="m3 16 5-5 4 4 3-3 6 6"/>
-                    <circle cx="16" cy="9" r="1.5"/>
-                </svg>
-                <h3>Your moments</h3>
-                <p>The photos and videos that make you, you</p>
-            </a>
-            <a class="card" href="zahra-kite.html" style="--bg:linear-gradient(160deg,#6d8fb0,#c98a82);--glow:#ffd9c2;--dl:1.3s">
-                <svg viewBox="0 0 24 24">
-                    <path d="M12 2 19 9l-7 9-7-9z"/>
-                    <path d="M12 2v16M5 9h14"/>
-                    <path d="M12 18c-1 2 1 2 0 4"/>
-                </svg>
-                <h3>The kite</h3>
-                <p>Your birthday by the sea</p>
-            </a>
-            <a class="card" href="zahra-nightsky.html" style="--bg:linear-gradient(160deg,#1d2858,#0b1026);--glow:#b9c6ff;--dl:1.4s">
-                <svg viewBox="0 0 24 24">
-                    <path d="m12 3 1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6z"/>
-                    <path d="M19 15v4M17 17h4M5 17v2M4 18h2"/>
-                </svg>
-                <h3>The night you were born</h3>
-                <p>The sky over Lahore, 15 August 2001</p>
-            </a>
-            <a class="card" href="zahra-song.html" style="--bg:linear-gradient(160deg,#e9a38c,#b86a5a);--glow:#fff1e2;--dl:1.5s">
-                <svg viewBox="0 0 24 24">
-                    <path d="M9 18V6l11-2v12"/>
-                    <circle cx="6.5" cy="18" r="2.5"/>
-                    <circle cx="17.5" cy="16" r="2.5"/>
-                </svg>
-                <h3>Your song</h3>
-                <p>Your name, turned into music</p>
-            </a>
-            <a class="card" href="zahra-lantern.html" style="--bg:linear-gradient(160deg,#2a2a55,#0b0f24);--glow:#ff9d4d;--dl:1.6s">
-                <svg viewBox="0 0 24 24">
-                    <path d="M6 4h12l-2 13H8z"/>
-                    <path d="M10 4l-.5 13M14 4l.5 13"/>
-                    <path d="M12 19v2"/>
-                </svg>
-                <h3>Our lantern</h3>
-                <p>The one we never got to light</p>
-            </a>
-            <a class="card wide" href="zahra-garden.html" style="--bg:linear-gradient(135deg,#9db57f,#d9a38e);--glow:#fff3e6;--dl:1.7s">
-                <svg viewBox="0 0 24 24">
-                    <circle cx="12" cy="8" r="2"/>
-                    <path d="M12 6c0-3 3-3 3 0M12 6c0-3-3-3-3 0M14 8c3 0 3 3 0 3M10 8c-3 0-3 3 0 3M12 10c0 3 3 3 3 0M12 10c0 3-3 3-3 0"/>
-                    <path d="M12 12v10M12 18c-2-2-4-2-5-1M12 16c2-2 4-2 5-1"/>
-                </svg>
-                <h3>Your garden</h3>
-                <p>Everything I love about you, in bloom</p>
-            </a>
-        </nav>
+    <a class="note-link reveal" href="ilr-neg.html">
+      <span class="ic">&#9825;</span>
+      <span class="t"><b>A letter for you</b><span class="s">I wrote this for you this week. Open it whenever you&rsquo;re ready.</span></span>
+      <span class="go">&rsaquo;</span>
+    </a>
 
-        <footer>
-            <p>You will always be my baby girl</p>
-            <div class="sig script">
-                I love you.
-                <br>
-                Adam
-            </div>
-            <span class="heart">&#9829;</span>
-        </footer>
-    </div>
-    <script>
-    for (var i = 0; i < 45; i++) {
-        var s = document.createElement("span");
-        s.className = "sparkle";
-        s.style.left = Math.random() * 100 + "vw";
-        s.style.top = Math.random() * 100 + "vh";
-        s.style.setProperty("--t", (3 + Math.random() * 4) + "s");
-        s.style.setProperty("--d", (Math.random() * 5) + "s");
-        document.body.appendChild(s)
-    }
-    </script>
+    <div class="label eyebrow reveal">Always yours</div>
+
+    <nav class="grid">
+      <a class="card wide reveal" href="zahra-slideshow.html" style="--bg:linear-gradient(120deg,#f6dcd2,#efc9be)">
+        <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 16 5-5 4 4 3-3 6 6"/><circle cx="16" cy="9" r="1.5"/></svg></span>
+        <span class="t"><h2>Your moments</h2><p>The photos and videos that make you, you</p></span>
+      </a>
+      <a class="card reveal" href="zahra-kite.html" style="--bg:linear-gradient(180deg,#d8e5f1,#f2d6cc)">
+        <span class="n">I</span>
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2 19 9l-7 9-7-9z"/><path d="M12 2v16M5 9h14"/><path d="M12 18c-1 2 1 2 0 4"/></svg></span>
+        <span class="t"><h2>The kite</h2><p>Your birthday by the sea</p></span>
+      </a>
+      <a class="card reveal" href="zahra-nightsky.html" style="--bg:linear-gradient(180deg,#cfd3ea,#e7dbef)">
+        <span class="n">II</span>
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="m12 3 1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6z"/><path d="M19 15v4M17 17h4M5 17v2M4 18h2"/></svg></span>
+        <span class="t"><h2>The night you were born</h2><p>Lahore, 15 August 2001</p></span>
+      </a>
+      <a class="card reveal" href="zahra-song.html" style="--bg:linear-gradient(180deg,#f7dccb,#efc3b4)">
+        <span class="n">III</span>
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M9 18V6l11-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></svg></span>
+        <span class="t"><h2>Your song</h2><p>Your name, turned into music</p></span>
+      </a>
+      <a class="card reveal" href="zahra-lantern.html" style="--bg:linear-gradient(180deg,#e3d6ec,#f6dbc6)">
+        <span class="n">IV</span>
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M6 4h12l-2 13H8z"/><path d="M10 4l-.5 13M14 4l.5 13"/><path d="M12 19v2"/></svg></span>
+        <span class="t"><h2>Our lantern</h2><p>The one we never got to light</p></span>
+      </a>
+      <a class="card wide reveal" href="zahra-garden.html" style="--bg:linear-gradient(120deg,#dde7d2,#f2dacd)">
+        <span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="2"/><path d="M12 6c0-3 3-3 3 0M12 6c0-3-3-3-3 0M14 8c3 0 3 3 0 3M10 8c-3 0-3 3 0 3M12 10c0 3 3 3 3 0M12 10c0 3-3 3-3 0"/><path d="M12 12v10M12 18c-2-2-4-2-5-1M12 16c2-2 4-2 5-1"/></svg></span>
+        <span class="t"><h2>Your garden</h2><p>Everything I love about you, in bloom</p></span>
+      </a>
+    </nav>
+
+    <footer class="reveal">
+      <p>You will always be my baby girl</p>
+      <div class="sig">I love you,<br>Adam</div>
+      <span class="heart">&#9829;</span>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var items = document.querySelectorAll(".reveal");
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+      }, { threshold: 0.15 });
+      items.forEach(function (el, i) { el.style.transitionDelay = Math.min(i * 0.08, 0.6) + "s"; io.observe(el); });
+    })();
+  </script>
     <!-- Visit tracking (skips devices flagged from the dashboard) -->
     <script>
     (function () {
